@@ -1,0 +1,773 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="Clickable concept prototype of Art-Science Europe, the European Art-Science-Tech Platform for Climate Transformation. Example content only.">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Art-Science Europe Prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* Layout: a "guide + screen" split taken from the pitch deck. Left, a quiet guide column explains the view; right, the platform itself, fully clickable. One light, green world (deliberately single-theme, per Anke). */
+:root{
+  --paper:#F5F8F2; --mint:#E6F0E8; --panel:#FDFEFC; --wash:#EBF3ED;
+  --ink:#15322B; --ink-soft:#4B615A; --muted:#5E7169; --line:#D3E2D6; --line-strong:#9DBFA8;
+  --green:#2F7A57; --green-deep:#235F43; --leaf:#BFE0C9;
+  --art:#B8863B; --art-bg:#F3E3C0; --art-ink:#6B4B14;
+  --sci:#2F5D8A; --sci-bg:#DCE7F2; --sci-ink:#234A70;
+  --tech:#337A6A; --tech-bg:#D5EBE5; --tech-ink:#245A4D;
+  --soc:#A5533F; --soc-bg:#F2DDD5; --soc-ink:#7A3727;
+  --display:"Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --text:"Inter", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  --r-s:10px; --r-m:16px; --r-l:22px;
+  --shadow:0 18px 44px -18px rgba(21,50,43,.28), 0 2px 6px rgba(21,50,43,.06);
+  --ease:cubic-bezier(.16,1,.3,1);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{background:var(--paper)}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 15px/1.55 var(--text);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+::selection{background:var(--leaf);color:var(--ink)}
+:focus-visible{outline:2px solid var(--green);outline-offset:3px;border-radius:6px}
+button,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:0;padding:0}
+a{color:var(--green);text-underline-offset:3px}
+h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.05;margin:0;text-wrap:balance;letter-spacing:-.01em}
+p{margin:0}
+.wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.inner{max-width:1320px;margin:0 auto}
+
+/* Prototype ribbon */
+.ribbon{background:var(--ink);color:#E4EFE7;font-size:12.5px;letter-spacing:.02em}
+.ribbon .inner{display:flex;gap:12px;align-items:center;justify-content:space-between;min-height:38px;flex-wrap:wrap;padding-block:6px}
+.ribbon b{color:var(--leaf);font-weight:600}
+.ribbon .actions{display:flex;gap:8px;flex-wrap:wrap}
+.chipbtn{display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(191,224,201,.4);color:#E4EFE7;border-radius:999px;padding:4px 12px;font-size:12.5px;transition:background .2s}
+.chipbtn:hover{background:rgba(191,224,201,.14)}
+.chipbtn svg{width:14px;height:14px}
+
+/* App bar */
+.appbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(245,248,242,.92);backdrop-filter:saturate(1.2) blur(10px);-webkit-backdrop-filter:saturate(1.2) blur(10px);border-bottom:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--paper)}
+.appbar .inner{display:flex;align-items:center;gap:20px;min-height:64px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);flex:none}
+.brand-mark{width:30px;height:30px}
+.brand-name{font-family:var(--display);font-size:22px;font-weight:500;line-height:1}
+.brand-sub{display:block;font-family:var(--text);font-size:11px;color:var(--muted);letter-spacing:.04em;margin-top:2px}
+.nav{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;flex:1;min-width:0;mask-image:linear-gradient(90deg,#000 92%,transparent)}
+.nav::-webkit-scrollbar{display:none}
+.nav button{white-space:nowrap;padding:8px 12px;border-radius:999px;font-size:14px;color:var(--ink-soft);transition:background .2s,color .2s}
+.nav button:hover{background:var(--mint);color:var(--ink)}
+.nav button[aria-current="page"]{background:var(--ink);color:var(--paper)}
+.me{flex:none;display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink-soft)}
+.me .av{width:34px;height:34px;font-size:15px}
+
+/* Shell */
+.shell{display:grid;grid-template-columns:minmax(0,330px) minmax(0,1fr);gap:40px;padding-block:36px 64px;align-items:start}
+.guide{position:sticky;top:calc(env(safe-area-inset-top,0px) + 88px);display:flex;flex-direction:column;gap:18px}
+.guide h1{font-size:clamp(40px,4.4vw,60px);font-weight:400;letter-spacing:-.02em}
+.guide .lede{font-size:17px;line-height:1.55;color:var(--ink-soft);max-width:34ch}
+.guide .steps{display:flex;flex-direction:column;gap:12px;border-top:1px solid var(--line);padding-top:16px}
+.guide .step{display:grid;grid-template-columns:26px 1fr;gap:10px;align-items:start}
+.guide .step i{font-style:normal;width:26px;height:26px;border-radius:50%;background:var(--green);color:var(--paper);display:grid;place-items:center;font-size:12.5px;font-weight:600}
+.guide .step b{display:block;font-weight:600;font-size:14.5px}
+.guide .step span{color:var(--ink-soft);font-size:14px}
+.try{background:var(--mint);border-radius:var(--r-m);padding:14px 16px;font-size:14px;color:var(--ink);display:flex;gap:10px}
+.try svg{flex:none;width:18px;height:18px;color:var(--green);margin-top:2px}
+.guide-foot{display:flex;flex-direction:column;gap:10px;border-top:1px solid var(--line);padding-top:16px}
+.tourbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.tourbar .btn-dark{white-space:normal;text-align:left}
+.tourbar .count{font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums;margin-right:auto;white-space:nowrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;padding:10px 18px;font-weight:500;font-size:14px;transition:background .2s,transform .2s var(--ease),box-shadow .2s;white-space:nowrap}
+.btn svg{width:16px;height:16px}
+.btn-dark{background:var(--ink);color:var(--paper)}
+.btn-dark:hover{background:#0E2620}
+.btn-green{background:var(--green);color:#fff}
+.btn-green:hover{background:var(--green-deep)}
+.btn-line{border:1.5px solid var(--ink);color:var(--ink);padding:8.5px 16.5px}
+.btn-line:hover{background:var(--mint)}
+.btn-ghost{color:var(--ink-soft);padding:8px 10px}
+.btn-ghost:hover{color:var(--ink);background:var(--mint)}
+.btn:active{transform:translateY(1px)}
+.btn[disabled]{opacity:.45;cursor:default}
+.feedback-note{font-size:12.5px;color:var(--muted)}
+
+/* Screen (the platform window) */
+.screen{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-l);box-shadow:var(--shadow);overflow:hidden;min-width:0}
+.screen-bar{height:44px;background:var(--wash);display:flex;align-items:center;gap:8px;padding:0 16px;border-bottom:1px solid var(--line)}
+.screen-bar i{width:11px;height:11px;border-radius:50%;background:#C2D6C8}
+.screen-bar span{margin-left:10px;font-size:13px;color:var(--ink-soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.screen-bar em{margin-left:auto;font-style:normal;font-size:11.5px;color:var(--muted);white-space:nowrap}
+.view{padding:28px;display:flex;flex-direction:column;gap:24px;min-width:0}
+.view.enter{animation:enter .55s var(--ease)}
+@keyframes enter{from{opacity:.001;transform:translateY(10px);filter:blur(3px)}to{opacity:1;transform:none;filter:none}}
+
+/* Shared bits */
+.av{border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-weight:600;color:var(--paper);flex:none}
+.tag{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:4px 12px;font-size:12.5px;font-weight:500;white-space:nowrap}
+.t-art{background:var(--art-bg);color:var(--art-ink)} .t-sci{background:var(--sci-bg);color:var(--sci-ink)}
+.t-tech{background:var(--tech-bg);color:var(--tech-ink)} .t-soc{background:var(--soc-bg);color:var(--soc-ink)}
+.t-inst{background:var(--wash);color:var(--ink);border:1px solid var(--line)} .t-res{background:var(--mint);color:var(--green-deep)}
+.search{display:flex;align-items:center;gap:12px;background:#fff;border:1.5px solid var(--green);border-radius:999px;padding:0 8px 0 20px;min-height:56px}
+.search svg{width:20px;height:20px;color:var(--green);flex:none}
+.search input{flex:1;min-width:0;border:0;outline:0;background:transparent;font-size:16px;padding:14px 0}
+.search input::placeholder{color:var(--muted)}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{border-radius:999px;padding:6px 14px;font-size:13.5px;background:var(--mint);color:var(--ink-soft);border:1px solid transparent;transition:background .2s,color .2s}
+.chip:hover{color:var(--ink);border-color:var(--line-strong)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.label{font-size:12.5px;font-weight:600;color:var(--green);letter-spacing:.01em}
+.hsec{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.hsec h2{font-size:30px}
+.hsec .more{font-size:13.5px}
+.tabs{display:flex;gap:26px;border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:none}
+.tabs button{padding:0 2px 10px;font-size:14.5px;color:var(--muted);border-bottom:3px solid transparent;margin-bottom:-1px;white-space:nowrap}
+.tabs button[aria-selected="true"]{color:var(--ink);font-weight:600;border-color:var(--green)}
+.box{border:1px solid var(--line);border-radius:var(--r-m);background:#fff}
+.icon{width:18px;height:18px;flex:none}
+.muted{color:var(--muted)} .soft{color:var(--ink-soft)}
+.example{font-size:12px;color:var(--muted)}
+
+/* Home */
+.hero{position:relative;border-radius:var(--r-m);overflow:hidden;background:linear-gradient(135deg,#F7FAF5 0%,#E2F0E7 55%,#D4E9EC 100%);padding:40px 36px 36px;min-height:360px;display:flex;flex-direction:column;justify-content:flex-end;gap:16px}
+.hero svg.art{position:absolute;right:-60px;top:-30px;width:68%;height:auto;pointer-events:none}
+.hero .copy{position:relative;display:flex;flex-direction:column;gap:14px;max-width:560px}
+.hero h2{font-size:clamp(40px,5vw,64px);font-weight:400;letter-spacing:-.02em}
+.hero .claim{font-family:var(--display);font-style:italic;font-size:22px;color:var(--ink-soft);line-height:1.3}
+.hero .search{max-width:560px;position:relative;box-shadow:0 10px 30px -14px rgba(21,50,43,.35)}
+.areas{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-top:1px solid var(--line)}
+.area{display:flex;flex-direction:column;gap:8px;padding:18px 16px 18px 0;text-align:left;border-right:1px solid var(--line);margin-right:16px;transition:transform .25s var(--ease)}
+.area:last-child{border-right:0;margin-right:0}
+.area:hover{transform:translateY(-2px)}
+.area:hover h3{color:var(--green)}
+.area .dot{width:10px;height:10px;border-radius:50%}
+.area h3{font-size:21px;transition:color .2s}
+.area p{font-size:13.5px;color:var(--ink-soft)}
+.area .go{margin-top:auto;font-size:13px;color:var(--green);display:inline-flex;gap:4px;align-items:center}
+.flow{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:0;position:relative}
+.flow::before{content:"";position:absolute;left:8%;right:8%;top:22px;border-top:1.5px dashed var(--line-strong)}
+.fstep{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;position:relative;padding:0 4px}
+.fstep .ring{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--mint);color:var(--ink)}
+.fstep:nth-child(1) .ring{background:var(--panel);border:1.5px dashed var(--green)}
+.fstep:nth-child(3) .ring{background:#8CCBA6} .fstep:nth-child(4) .ring{background:#4F9E77;color:#fff}
+.fstep:nth-child(5) .ring{background:var(--green);color:#fff} .fstep:nth-child(6) .ring{background:var(--ink);color:var(--leaf)}
+.fstep:nth-child(2) .ring{background:var(--leaf)}
+.fstep b{font-size:14px} .fstep span{font-size:12.5px;color:var(--ink-soft);line-height:1.35}
+.launch{display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:center;border:1.5px solid var(--green);border-radius:var(--r-m);padding:18px 20px;background:#fff}
+.datebox{width:72px;height:72px;border-radius:14px;background:var(--green);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1}
+.datebox b{font-family:var(--display);font-size:28px;font-weight:500}
+.datebox span{font-size:12px;color:#F1F7F2;margin-top:4px;letter-spacing:.04em}
+.datebox.dark{background:var(--ink)}
+.launch h3{font-size:26px}
+
+/* Matchmaking */
+.results{display:flex;flex-direction:column;gap:12px}
+.result{display:grid;grid-template-columns:64px 1fr auto;gap:18px;align-items:start;padding:18px 20px;border:1px solid var(--line);border-radius:var(--r-m);background:#fff;transition:border-color .2s,box-shadow .25s}
+.result:hover{border-color:var(--line-strong);box-shadow:0 10px 26px -18px rgba(21,50,43,.35)}
+.result .av{width:64px;height:64px;font-size:26px}
+.result .who{display:flex;flex-direction:column;gap:4px;min-width:0}
+.result .name{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.result .name b{font-size:17px}
+.why{font-size:14.5px;line-height:1.5}
+.why strong{font-weight:600}
+.fit{font-size:12px;color:var(--green);display:flex;gap:6px;align-items:center;margin-top:2px}
+.result .acts{display:flex;flex-direction:column;gap:8px;align-items:stretch}
+.empty{padding:30px;text-align:center;border:1.5px dashed var(--line-strong);border-radius:var(--r-m);color:var(--ink-soft)}
+
+/* Profiles */
+.drop{display:flex;align-items:center;gap:16px;border:1.5px dashed var(--line-strong);border-radius:var(--r-m);background:var(--paper);padding:16px 20px;flex-wrap:wrap}
+.drop svg{width:34px;height:34px;color:var(--green)}
+.drop .t{flex:1;min-width:200px}
+.drop .t b{display:block}
+.prof-head{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.prof-head .av{width:76px;height:76px;font-size:32px}
+.prog{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--ink-soft)}
+.prog .bar{width:180px;max-width:40vw;height:8px;border-radius:4px;background:var(--line);overflow:hidden}
+.prog .bar i{display:block;height:100%;background:var(--green);border-radius:4px;transition:width .8s var(--ease)}
+.persp{border:1.5px solid var(--line);color:var(--muted);background:#fff}
+.persp[aria-pressed="true"].art{background:var(--art-bg);border-color:var(--art);color:var(--ink)}
+.persp[aria-pressed="true"].sci{background:var(--sci-bg);border-color:var(--sci);color:var(--ink)}
+.persp[aria-pressed="true"].tech{background:var(--tech-bg);border-color:var(--tech);color:var(--ink)}
+.persp[aria-pressed="true"].soc{background:var(--soc-bg);border-color:var(--soc);color:var(--ink)}
+.skill{background:var(--mint);color:var(--ink)}
+.skill.suggested{background:#fff;border:1.5px dashed var(--green);color:var(--green-deep);animation:pop .45s var(--ease) both}
+@keyframes pop{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:none}}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-m);padding:14px 16px;display:flex;flex-direction:column;gap:4px}
+.kinds{display:flex;flex-direction:column;gap:8px}
+.kind{display:flex;gap:12px;align-items:center;padding:12px 14px;border:1px solid var(--line);border-radius:var(--r-s);background:#fff;font-size:14px;text-align:left}
+.kind .dot{width:10px;height:10px;border-radius:50%;flex:none}
+
+/* Events */
+.ev-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:20px}
+.ev-grid>*,.ev>div{min-width:0}
+.evlist{display:flex;flex-direction:column;gap:10px}
+.ev{display:grid;grid-template-columns:64px 1fr auto;gap:14px;align-items:center;padding:12px;border:1px solid var(--line);border-radius:var(--r-m);background:#fff}
+.ev .datebox{width:64px;height:64px;background:var(--ink)}
+.ev .datebox b{font-size:26px}
+.ev.hl{border:1.5px solid var(--green)} .ev.hl .datebox{background:var(--green)}
+.ev b{font-size:15.5px;display:block;line-height:1.3}
+.ev small{color:var(--ink-soft);font-size:13px}
+.live{border-radius:var(--r-m);overflow:hidden;background:var(--ink);color:#E4EFE7;display:flex;flex-direction:column}
+.live .thumb{height:170px;background:linear-gradient(135deg,#5FB39A,#2F5D8A);position:relative;display:grid;place-items:center}
+.live .thumb .play{width:64px;height:64px;border-radius:50%;background:var(--paper);color:var(--ink);display:grid;place-items:center}
+.live .thumb .badge{position:absolute;left:12px;top:12px;background:var(--paper);color:var(--ink);font-size:12.5px;font-weight:600;border-radius:999px;padding:4px 12px}
+.live .body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:8px}
+.live h3{font-family:var(--text);font-size:17px;font-weight:600;color:#fff;letter-spacing:0}
+.live p{font-size:14px;color:#C9DCD2}
+.rec{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.rec div{height:92px;border-radius:12px;display:flex;align-items:flex-end;padding:10px 12px;color:#fff;font-size:13.5px;font-weight:600}
+
+/* Opportunities */
+.opps{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.opp{display:flex;flex-direction:column;gap:10px;padding:18px 20px;border:1px solid var(--line);border-radius:var(--r-m);background:#fff}
+.opp h3{font-size:24px}
+.opp .meta{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--ink-soft)}
+.opp .meta span{display:inline-flex;gap:6px;align-items:center}
+.opp .row{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-top:auto}
+
+/* Project space */
+.space{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.4fr) minmax(0,1fr);border:1px solid var(--line);border-radius:var(--r-m);overflow:hidden;background:#fff}
+.col{padding:18px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.col + .col{border-left:1px solid var(--line)}
+.col.side{background:var(--paper)}
+.colhead{display:flex;gap:10px;align-items:center;font-weight:600;color:var(--green);font-size:14px}
+.colhead i{font-style:normal;width:26px;height:26px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;font-size:12.5px}
+.member{display:flex;gap:10px;align-items:center}
+.member .av{width:38px;height:38px;font-size:15px}
+.member b{display:block;font-size:14px;line-height:1.25}
+.member small{font-size:12.5px;color:var(--ink-soft)}
+.chat{display:flex;flex-direction:column;gap:10px;flex:1;min-height:240px;max-height:340px;overflow-y:auto;padding-right:4px}
+.msg{display:flex;gap:10px;align-items:flex-start}
+.msg .av{width:32px;height:32px;font-size:13px}
+.bubble{background:var(--mint);border-radius:14px;padding:9px 12px;font-size:14px;max-width:100%}
+.bubble.ai{background:var(--ink);color:#F1F7F2}
+.bubble.ai b{color:var(--leaf);display:block;font-size:12.5px;margin-bottom:2px}
+.bubble.me{background:var(--green);color:#fff}
+.msg.mine{flex-direction:row-reverse}
+.doc{display:flex;gap:10px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:#fff;font-size:13.5px}
+.doc svg{color:var(--tech)}
+.check{font-size:12px;color:var(--green);display:flex;gap:5px;align-items:center}
+.composer{display:flex;gap:8px;align-items:center;border:1.5px solid var(--green);border-radius:999px;padding:4px 4px 4px 16px;background:#fff}
+.composer input{flex:1;min-width:0;border:0;outline:0;background:transparent;font-size:14px;padding:8px 0}
+.composer button{width:38px;height:38px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center}
+.quota{display:flex;align-items:baseline;gap:10px}
+.quota b{font-family:var(--display);font-size:52px;font-weight:500;line-height:.9;font-variant-numeric:tabular-nums}
+.meter{height:10px;border-radius:5px;background:var(--line);overflow:hidden}
+.meter i{display:block;height:100%;width:62%;background:var(--green);border-radius:5px;transition:width .6s var(--ease)}
+.feat{display:flex;gap:10px;align-items:flex-start;font-size:13.5px}
+.feat svg{color:var(--green);margin-top:2px}
+.feat b{display:block;font-size:14px}
+.goal{font-size:11px;font-weight:600;color:var(--art-ink);background:var(--art-bg);border-radius:999px;padding:2px 9px;margin-left:4px;vertical-align:1px}
+
+/* Outcomes */
+.outcome{display:grid;grid-template-columns:220px 1fr;border:1px solid var(--line);border-radius:var(--r-m);overflow:hidden;background:#fff}
+.outcome .vis{background:var(--mint);display:grid;place-items:center;padding:16px}
+.outcome .body{padding:20px 22px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.outcome h3{font-size:32px}
+.similar{display:flex;gap:10px;align-items:center;background:var(--paper);border-radius:12px;padding:10px 14px;font-size:14px}
+.similar svg{color:var(--art)}
+.minis{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.mini{border:1px solid var(--line);border-radius:var(--r-m);padding:16px 18px;background:#fff;display:flex;flex-direction:column;gap:10px;align-items:flex-start;text-align:left}
+.mini b{font-size:16px}
+
+/* Membership */
+.tiers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.tier{border:1px solid var(--line);border-radius:var(--r-m);background:#fff;padding:22px;display:flex;flex-direction:column;gap:12px;position:relative;overflow:hidden}
+.tier::before{content:"";position:absolute;inset:0 0 auto;height:6px;background:var(--c)}
+.tier .for{font-size:12.5px;font-weight:600;color:var(--green)}
+.tier h3{font-size:36px}
+.tier .price{color:var(--ink-soft);font-size:14px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.tier ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px;font-size:14px}
+.tier li{display:grid;grid-template-columns:10px 1fr;gap:10px;align-items:baseline}
+.tier li::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--c);transform:translateY(-1px)}
+.tier .btn{margin-top:auto;align-self:flex-start}
+.reasons{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;border-top:1px solid var(--line);padding-top:18px}
+.reasons h3{font-size:22px;margin-bottom:4px}
+.reasons p{font-size:14px;color:var(--ink-soft)}
+
+/* Toast */
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);background:var(--ink);color:#F1F7F2;padding:12px 18px;border-radius:14px;font-size:14px;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:opacity .3s,transform .4s var(--ease);z-index:50;max-width:min(520px,calc(100vw - 32px));display:flex;gap:10px;align-items:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.toast svg{color:var(--leaf);flex:none}
+
+footer.foot{border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+footer.foot .inner{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-block:20px}
+
+/* Responsive */
+@media (max-width:1080px){
+  .shell{display:flex;flex-direction:column;gap:18px;padding-block:22px 48px}
+  .guide{display:contents}
+  .guide h1{order:1} .guide .lede{order:2} .screen{order:3} .guide .steps{order:4} .guide .try{order:5} .guide .guide-foot{order:6}
+  .guide h1{font-size:40px}
+  .guide .lede{max-width:60ch}
+  .areas{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .area{border-right:0;margin-right:0;padding-right:12px;border-bottom:1px solid var(--line)}
+  .space{grid-template-columns:1fr}
+  .col + .col{border-left:0;border-top:1px solid var(--line)}
+  .chat{max-height:none}
+}
+@media (max-width:720px){
+  .me>span:first-child{display:none}
+  .brand-sub{display:none}
+  .appbar .inner{flex-wrap:wrap;gap:8px 12px;padding-block:8px}
+  .nav{order:3;flex-basis:100%}
+  .view{padding:18px}
+  .hero{padding:26px 20px 22px;min-height:300px}
+  .hero svg.art{width:110%;right:-40%;top:-20px;opacity:.75}
+  .areas{grid-template-columns:1fr 1fr}
+  .flow{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:18px}
+  .flow::before{display:none}
+  .launch{grid-template-columns:auto 1fr}
+  .launch .btn{grid-column:1/-1;justify-self:start}
+  .result{grid-template-columns:48px 1fr;gap:12px;padding:14px}
+  .result .av{width:48px;height:48px;font-size:20px}
+  .result .acts{grid-column:1/-1;flex-direction:row;flex-wrap:wrap}
+  .two,.opps,.minis,.tiers,.reasons,.ev-grid{grid-template-columns:1fr}
+  .outcome{grid-template-columns:1fr}
+  .outcome .vis{height:160px}
+  .screen-bar em{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .node-pulse{animation:none!important}
+}
+.node-pulse{animation:pulse 4.5s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes pulse{0%,100%{opacity:.9;transform:scale(1)}50%{opacity:1;transform:scale(1.25)}}
+</style>
+</head>
+<body>
+
+<div class="ribbon wrap">
+  <div class="inner">
+    <span><b>Prototype</b> · clickable concept · all people, organisations, dates and numbers are fictional examples</span>
+    <span class="actions">
+      <button class="chipbtn" id="fb-ribbon" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>Comment on this view</button>
+    </span>
+  </div>
+</div>
+
+<header class="appbar wrap">
+  <div class="inner">
+    <a class="brand" href="#home" data-go="home" aria-label="Art-Science Europe home">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><circle cx="13" cy="16" r="9" fill="#B8863B" fill-opacity=".35"/><circle cx="19" cy="16" r="9" fill="#2F5D8A" fill-opacity=".3"/><path d="M16 9c2.6 2.7 2.6 11.3 0 14-2.6-2.7-2.6-11.3 0-14Z" fill="#2F7A57"/></svg>
+      <span><span class="brand-name">Art-Science Europe</span><span class="brand-sub">Climate Transformation</span></span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Platform"></nav>
+    <button class="me" data-go="profile" type="button" aria-label="My profile"><span>Jana Keller</span><span class="av" style="background:var(--tech)">JK</span></button>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="inner shell">
+    <aside class="guide" id="guide" aria-live="polite"></aside>
+    <section class="screen" aria-label="Platform view">
+      <div class="screen-bar"><i></i><i></i><i></i><span id="screen-title">Art-Science Europe</span><em>Prototype view · example content</em></div>
+      <div class="view" id="view" data-comment-target></div>
+    </section>
+  </div>
+</main>
+
+<footer class="foot wrap">
+  <div class="inner">
+    <span>Initiated and coordinated by GERICS – Climate Service Center Germany, Helmholtz</span>
+    <span>First draft by Disruptive Consciousness · Concept prototype, October 2026</span>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span></span></div>
+
+<script>
+(function(){
+"use strict";
+const I={
+search:'<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>',
+arrow:'<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
+back:'<path d="M19 12H5"/><path d="m12 19-7-7 7-7"/>',
+cloud:'<path d="M12 13v8"/><path d="m8 17 4-4 4 4"/><path d="M20.4 16.7A5 5 0 0 0 18 7h-1.3A8 8 0 1 0 4 15.3"/>',
+play:'<polygon points="7 4 20 12 7 20 7 4" fill="currentColor"/>',
+bulb:'<path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/>',
+book:'<path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/>',
+send:'<path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/>',
+lock:'<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+chat:'<path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/>',
+db:'<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/>',
+link:'<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>',
+globe:'<circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/>',
+users:'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+tool:'<rect x="2" y="7" width="20" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M2 13h20"/>',
+star:'<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>',
+pin:'<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>',
+cal:'<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>',
+clock:'<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>',
+check:'<path d="M20 6 9 17l-5-5"/>',
+sparkle:'<path d="M12 3l1.9 5.8L20 10.7l-6.1 1.9L12 18.5l-1.9-5.9L4 10.7l6.1-1.9Z"/>',
+plus:'<path d="M12 5v14M5 12h14"/>',
+x:'<path d="M18 6 6 18M6 6l12 12"/>',
+eye:'<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/>'
+};
+const ic=(n,c)=>`<svg class="icon ${c||''}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${I[n]}</svg>`;
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const P={art:{l:"Art",c:"var(--art)",t:"t-art"},sci:{l:"Science",c:"var(--sci)",t:"t-sci"},tech:{l:"Technology",c:"var(--tech)",t:"t-tech"},soc:{l:"Society",c:"var(--soc)",t:"t-soc"}};
+
+/* ---------- Example content (fictional) ---------- */
+const PEOPLE=[
+ {id:"al",ini:"AL",name:"Dr. Anna Lindqvist",kind:"person",p:"sci",role:"Coastal research · Climate service centre, Hamburg",why:"works on coastal erosion and is looking for an artistic perspective on her data.",kw:"coast coastal erosion data sea"},
+ {id:"me",ini:"ME",name:"Mara Eliasson",kind:"person",p:"art",role:"Immersive installations · Tallinn",why:"makes sea-level rise tangible in space and is looking for scientific partners.",kw:"installation art sea level coast immersive"},
+ {id:"jw",ini:"JW",name:"Jonas Weber",kind:"person",p:"tech",role:"Data sonification · Berlin",why:"turns sensor data into sound and needs long coastal time series to work with.",kw:"data sound sensor coast technology"},
+ {id:"kn",ini:"KN",name:"Kunsthalle Nord",kind:"inst",p:"art",role:"Art museum · Kiel",why:"plans an exhibition on the Baltic coast and seeks a climate research partner.",kw:"museum exhibition coast baltic art institution"},
+ {id:"bo",ini:"BO",name:"Baltic Ocean Institute",kind:"inst",p:"sci",role:"Research institute · Rostock",why:"has 30 years of shoreline measurements and seeks artists to make them public.",kw:"ocean data coast erosion research institution"},
+ {id:"cm",ini:"CM",name:"Coastal municipality Algarve",kind:"inst",p:"soc",role:"Local government · Portugal",why:"needs participatory formats to discuss managed retreat with residents.",kw:"society municipality coast erosion citizens"},
+ {id:"ar",ini:"AR",name:"Arctic Field Station Residency",kind:"res",p:"sci",role:"Residency · three months · Svalbard region",why:"offers artists studio space next to permafrost and coastal monitoring.",kw:"residency arctic coast permafrost"}
+];
+const EVENTS=[
+ {d:"12",m:"NOV",t:"Panel: Coasts in transition",w:"Hamburg · on site",type:"cal"},
+ {d:"19",m:"NOV",t:"Webinar: Making data visible",w:"Online · live",type:"web"},
+ {d:"03",m:"DEC",t:"Exhibition: Sea level",w:"Tallinn · on site",type:"cal"},
+ {d:"DEC",m:"2026",t:"Platform Launch",w:"GERICS · Hamburg · date to be confirmed",type:"cal",hl:true}
+];
+const OPPS=[
+ {k:"call",title:"Art-Science teams wanted on urban heat",org:"City climate office · Vienna",when:"Deadline 15 Jan 2027",what:"Funding for six-month pilots that make heat islands visible and liveable.",p:["art","sci","soc"]},
+ {k:"res",title:"Arctic Field Station Residency",org:"Svalbard region",when:"3 months · from April 2027",what:"Studio, lodging and access to coastal monitoring data for one artist.",p:["art","sci"]},
+ {k:"call",title:"Data stories from the North Sea",org:"Marine research foundation",when:"Deadline 28 Feb 2027",what:"Grants for teams that turn ocean datasets into public formats.",p:["sci","tech","art"]},
+ {k:"res",title:"Glacier Lab Residency",org:"Alpine research station",when:"6 weeks · summer 2027",what:"Artists join a glaciology team on fieldwork and in the lab.",p:["art","sci"]}
+];
+
+/* ---------- Views ---------- */
+const VIEWS=[
+ {id:"home",nav:"Home",title:"Homepage",win:"Art-Science Europe · Homepage",
+  lede:"One search for expertise, topics, and opportunities. Explore the platform’s five key areas below.",
+  steps:[["Search","Start with a question or a topic, not with a category."],["Five areas","Matchmaking, Events, Open Calls & Projects, Artist Residencies, Exchange & Collaboration."]],
+  tryit:"Type a topic into the search, for example “coastal erosion”, and press Enter."},
+ {id:"matchmaking",nav:"Matchmaking",title:"Matchmaking",win:"Art meets Science · Matchmaking",
+  lede:"From the right question to the right connection. Every match explains why it fits and what it could lead to.",
+  steps:[["Why it fits","Each result says in one sentence why this person or organisation is relevant."],["Not only people","Institutions and residencies appear next to individuals."],["Next step","Request a conversation, or open a shared space right away."]],
+  tryit:"Filter by Institutions, then open a shared space with one of the results."},
+ {id:"profile",nav:"Profiles",title:"Profiles",win:"My profile · Skills",
+  lede:"Upload, confirm, done. Every profile shows what people do, seek, and offer.",
+  steps:[["Upload","Portfolio, CV, or website."],["AI suggests skills","You confirm or change them. Nothing is published without you."],["Four profile types","Person, Institution, Residency, Open Call."]],
+  tryit:"Click “Use example portfolio” and confirm the suggested skills."},
+ {id:"events",nav:"Events",title:"Events",win:"Events & Webinars",
+  lede:"A curated European calendar of exhibitions, conferences, workshops, and festivals. Live webinars, with every recording available on demand.",
+  steps:[["Calendar","Curated by theme, across Europe."],["Webinars","Live, with recordings that stay available."]],
+  tryit:"Save a seat for the live webinar, then look at the Platform Launch."},
+ {id:"opportunities",nav:"Open Calls & Residencies",title:"Open Calls & Residencies",win:"Opportunities",
+  lede:"Calls, funding, and residency programmes at the intersection of art and research. They are what turn a match into a joint project.",
+  steps:[["Open calls","Funding and cooperation offers with clear deadlines."],["Residencies","Places where artists work alongside research teams."]],
+  tryit:"Switch between Open calls and Residencies, then find partners for one call."},
+ {id:"space",nav:"Project Space",title:"Project Space",win:"Project space · Water",
+  lede:"Where a match turns into a project. Teams come together to tackle a specific challenge.",
+  steps:[["The team","People from art, science, technology, and society, brought together through matchmaking."],["The workspace","Chat, file sharing, and an AI research assistant. Every result is reviewed by people."],["Shared AI","Each space comes with an AI quota, powered by European models on European servers (goal). Together, members decide what to use it for."]],
+  tryit:"Write a message to the team and see how the AI assistant answers."},
+ {id:"outcomes",nav:"Shared outcomes",title:"Shared outcomes",win:"Shared outcomes",
+  lede:"Project outcomes are shared openly, so others facing similar challenges can adopt and build on them.",
+  steps:[["Published","What a project space develops becomes a shared outcome."],["Similar problem found","The platform points to other places with the same challenge."]],
+  tryit:"Adopt the filter stage for your own project."},
+ {id:"membership",nav:"Membership",title:"Membership",win:"Membership",
+  lede:"Three ways to take part. Prices and benefits are open and will be set together in the founding workshop.",
+  steps:[["Individual","For people."],["Institution","For organisations, all staff included."],["Partner","For funders who shape the platform."]],
+  tryit:"Register your interest for the Platform Launch in December 2026."}
+];
+const byId=Object.fromEntries(VIEWS.map(v=>[v.id,v]));
+
+/* ---------- State ---------- */
+const S={query:"Coastal erosion meets installation art",filter:"all",profTab:"person",bring:{art:true,sci:false,tech:true,soc:false},skills:["Architecture","Water treatment","Prototyping"],suggested:[],progress:80,evTab:"cal",seat:false,oppTab:"call",msgs:null,adopted:false,interest:false,requested:{}};
+
+/* ---------- Helpers ---------- */
+const $=s=>document.querySelector(s);
+let toastT;
+function toast(msg){const t=$("#toast");t.querySelector("span").textContent=msg;t.classList.add("show");clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove("show"),3400);}
+function av(ini,color,size){const dark=color==="var(--art)";return `<span class="av" style="background:${color}${dark?";color:var(--ink)":""}${size?`;width:${size}px;height:${size}px`:""}">${esc(ini)}</span>`;}
+function tagFor(x){if(x.kind==="inst")return `<span class="tag t-inst">Institution</span>`;if(x.kind==="res")return `<span class="tag t-res">Residency</span>`;return `<span class="tag ${P[x.p].t}">${P[x.p].l}</span>`;}
+
+/* ---------- Renderers ---------- */
+const R={};
+R.home=()=>`
+ <div class="hero">
+  ${heroArt()}
+  <div class="copy">
+   <h2>Where art meets science.</h2>
+   <p class="claim">Connecting expertise. Enabling collaboration. Creating new possibilities.</p>
+  </div>
+  <form class="search" id="home-search" role="search">${ic("search")}<label class="sr" for="q-home" hidden>Search</label><input id="q-home" placeholder="Find expertise, projects or opportunities …" autocomplete="off"><button class="btn btn-green" type="submit">Search</button></form>
+ </div>
+ <div class="areas" role="list">
+  ${[["Art meets Science","Curated profiles of artists, scientists, and institutions.","matchmaking","var(--art)"],["Events","A European calendar of exhibitions, conferences, and webinars.","events","var(--sci)"],["Open Calls & Projects","Calls, funding, and cooperation offers.","opportunities","var(--tech)"],["Artist Residencies","Residency programmes where art and research meet.","opportunities:res","var(--soc)"],["Exchange & Collaboration","First project ideas, partner search, and shared spaces.","space","var(--green)"]].map(a=>`
+  <button class="area" role="listitem" data-go="${a[2]}"><span class="dot" style="background:${a[3]}"></span><h3>${a[0]}</h3><p>${a[1]}</p><span class="go">Open ${ic("arrow")}</span></button>`).join("")}
+ </div>
+ <div class="hsec"><h2>How it works</h2></div>
+ <div class="flow">
+  ${[["globe","Challenge","A starting point for collaboration"],["search","Discover","People, knowledge, and opportunities"],["users","Connect","Perspectives brought together"],["bulb","Develop","Ideas and project concepts"],["tool","Realize","Funding, pilots, and partnerships"],["star","Impact","Projects that drive transformation"]].map(s=>`<div class="fstep"><span class="ring">${ic(s[0])}</span><b>${s[1]}</b><span>${s[2]}</span></div>`).join("")}
+ </div>
+ <div class="launch">
+  <div class="datebox"><b>DEC</b><span>2026</span></div>
+  <div><h3>Platform Launch</h3><p class="soft">Climate Service Center Germany (GERICS), Hamburg · with an interactive media installation</p></div>
+  <button class="btn btn-dark" data-go="membership">Register interest ${ic("arrow")}</button>
+ </div>`;
+
+R.matchmaking=()=>{
+ const q=S.query.toLowerCase().split(/\s+/).filter(w=>w.length>2);
+ let list=PEOPLE.filter(x=>S.filter==="all"||(S.filter==="inst"&&x.kind==="inst")||(S.filter==="res"&&x.kind==="res")||(x.kind==="person"&&x.p===S.filter));
+ list=list.map(x=>({x,score:q.reduce((n,w)=>n+((x.kw+" "+x.role+" "+x.why).toLowerCase().includes(w)?1:0),0)})).filter(o=>!q.length||o.score>0).sort((a,b)=>b.score-a.score);
+ const chips=[["all","All"],["art","Art"],["sci","Science"],["tech","Technology"],["soc","Society"],["inst","Institutions"],["res","Residencies"]];
+ return `
+ <form class="search" id="mm-search" role="search">${ic("search")}<input id="q-mm" value="${esc(S.query)}" aria-label="Search" autocomplete="off"><button class="btn btn-green" type="submit">Search</button></form>
+ <div class="chips" role="group" aria-label="Filter">${chips.map(c=>`<button class="chip" data-filter="${c[0]}" aria-pressed="${S.filter===c[0]}">${c[1]}</button>`).join("")}</div>
+ <p class="muted" style="font-size:13.5px">${list.length} ${list.length===1?"match":"matches"} for “${esc(S.query)}”</p>
+ <div class="results">${list.length?list.map(({x})=>`
+  <article class="result" data-comment-target>
+   ${av(x.ini,P[x.p].c)}
+   <div class="who"><div class="name"><b>${esc(x.name)}</b>${tagFor(x)}</div><span class="soft" style="font-size:13.5px">${esc(x.role)}</span><p class="why"><strong>Why it fits:</strong> ${esc(x.why)}</p></div>
+   <div class="acts">
+    <button class="btn ${S.requested[x.id]?"btn-ghost":"btn-dark"}" data-request="${x.id}" ${S.requested[x.id]?"disabled":""}>${S.requested[x.id]?ic("check")+" Requested":"Request a conversation"}</button>
+    <button class="btn btn-line" data-go="space">Open a shared space</button>
+   </div>
+  </article>`).join(""):`<div class="empty">No matches for this search in the example data. Try “coast”, “data” or “residency”.</div>`}</div>`;
+};
+
+R.profile=()=>{
+ const tabs=[["person","Person"],["inst","Institution"],["res","Residency"],["call","Open Call"]];
+ let body="";
+ if(S.profTab==="person"){
+  body=`
+  <div class="drop">${I.cloud?`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${I.cloud}</svg>`:""}<div class="t"><b>Add portfolio, CV, or website</b><span class="soft" style="font-size:14px">AI suggests skills. You confirm or change them.</span></div><button class="btn btn-green" id="suggest" ${S.suggested.length||S.skills.length>3?"disabled":""}>${ic("sparkle")} Use example portfolio</button></div>
+  <div class="prof-head">${av("JK","var(--tech)")}<div style="display:flex;flex-direction:column;gap:6px"><h3 style="font-size:32px">Jana Keller</h3><span class="soft">Architect · Tenerife</span><div class="prog"><span class="bar"><i style="width:${S.progress}%"></i></span>${S.progress} % complete</div></div></div>
+  <div style="display:flex;flex-direction:column;gap:8px"><span class="label">I bring</span><div class="chips">${Object.keys(P).map(k=>`<button class="chip persp ${k}" data-bring="${k}" aria-pressed="${S.bring[k]}">${P[k].l}</button>`).join("")}</div></div>
+  <div style="display:flex;flex-direction:column;gap:8px"><span class="label">Skills</span><div class="chips">${S.skills.map(s=>`<span class="chip skill">${esc(s)}</span>`).join("")}${S.suggested.map(s=>`<span class="chip skill suggested">${ic("sparkle")} ${esc(s)}</span>`).join("")}</div>
+   ${S.suggested.length?`<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><span class="soft" style="font-size:13.5px">Suggested from the example portfolio.</span><button class="btn btn-dark" id="confirm-skills">${ic("check")} Confirm skills</button><button class="btn btn-ghost" id="discard-skills">Discard</button></div>`:""}</div>
+  <div class="two"><div class="field"><span class="label">I am looking for</span><span>Scientific partners for coastal protection</span></div><div class="field"><span class="label">I offer</span><span>Prototyping, spatial design, workshop access</span></div></div>
+  <p class="example">“I am looking for” and “I offer” drive the matches in Matchmaking.</p>`;
+ } else {
+  const ex={inst:[["var(--art)","Art museum seeks a climate research partner","Kunsthalle Nord · Kiel"],["var(--sci)","Research institute seeks artists for its ocean data","Baltic Ocean Institute · Rostock"]],
+   res:[["var(--tech)","Polar station offers a three-month art residency","Arctic Field Station · Svalbard region"],["var(--tech)","Glaciology lab hosts artists for six weeks","Alpine research station"]],
+   call:[["var(--soc)","Art-Science teams wanted on urban heat","City climate office · Vienna"],["var(--soc)","Data stories from the North Sea","Marine research foundation"]]}[S.profTab];
+  const intro={inst:"Institutions describe what they look for in the other discipline. Art institutions find research partners, and research institutes find artists.",res:"Residency programmes list place, duration, and what residents get access to.",call:"Open calls list funding, deadline, and the team they are looking for."}[S.profTab];
+  body=`<p class="soft" style="max-width:62ch">${intro}</p><div class="kinds">${ex.map(e=>`<div class="kind" data-comment-target><span class="dot" style="background:${e[0]}"></span><div><b>${e[1]}</b><br><span class="soft" style="font-size:13px">${e[2]}</span></div></div>`).join("")}</div>
+  <button class="btn btn-line" style="align-self:flex-start" data-go="${S.profTab==="inst"?"matchmaking:inst":"opportunities:"+S.profTab}">See them on the platform ${ic("arrow")}</button>`;
+ }
+ return `<div class="tabs" role="tablist">${tabs.map(t=>`<button role="tab" data-ptab="${t[0]}" aria-selected="${S.profTab===t[0]}">${t[1]}</button>`).join("")}</div>${body}`;
+};
+
+R.events=()=>{
+ const tabs=[["cal","Calendar"],["web","Webinars"],["rec","Recordings"]];
+ const list=S.evTab==="rec"?[]:EVENTS.filter(e=>S.evTab==="cal"||e.type==="web");
+ const left=S.evTab==="rec"
+  ?`<div class="rec">${[["Coastal protection","linear-gradient(135deg,#7CC09A,#2F7A57)"],["Climate and art","linear-gradient(135deg,#D9B26A,#2F7A57)"],["Data as material","linear-gradient(135deg,#7FA7CC,#2F5D8A)"],["Cities in heat","linear-gradient(135deg,#D59A84,#A5533F)"]].map(r=>`<div style="background:${r[1]}">${ic("play")}&nbsp;${r[0]}</div>`).join("")}</div>`
+  :`<div class="evlist">${list.map(e=>`<div class="ev ${e.hl?"hl":""}" data-comment-target><div class="datebox"><b>${e.d}</b><span>${e.m}</span></div><div><b>${esc(e.t)}</b><small>${esc(e.w)}</small></div>${e.hl?`<button class="btn btn-ghost" data-go="membership">Details</button>`:""}</div>`).join("")}</div>`;
+ return `<div class="tabs" role="tablist">${tabs.map(t=>`<button role="tab" data-etab="${t[0]}" aria-selected="${S.evTab===t[0]}">${t[1]}</button>`).join("")}</div>
+ <div class="ev-grid">${left}
+  <div style="display:flex;flex-direction:column;gap:14px">
+   <div class="live"><div class="thumb"><span class="badge">Live in 2 days</span><span class="play">${ic("play")}</span></div>
+    <div class="body"><h3>Water, data, sculpture</h3><p>Research meets installation. Speakers from four countries.</p>
+     <button class="btn ${S.seat?"btn-ghost":"btn-green"}" id="seat" style="align-self:flex-start;${S.seat?"color:var(--leaf)":""}">${S.seat?ic("check")+" Seat saved":"Save your seat"}</button></div></div>
+   <p class="soft" style="font-size:14px">Every webinar is recorded. Missed one? Find it under Recordings.</p>
+  </div></div>`;
+};
+
+R.opportunities=()=>{
+ const list=OPPS.filter(o=>o.k===S.oppTab);
+ return `<div class="tabs" role="tablist"><button role="tab" data-otab="call" aria-selected="${S.oppTab==="call"}">Open calls</button><button role="tab" data-otab="res" aria-selected="${S.oppTab==="res"}">Residencies</button></div>
+ <div class="opps">${list.map(o=>`<article class="opp" data-comment-target>
+  <span>${o.k==="call"?`<span class="tag t-soc">Open Call</span>`:`<span class="tag t-res">Residency</span>`}</span>
+  <h3>${esc(o.title)}</h3>
+  <div class="meta"><span>${ic("pin")}${esc(o.org)}</span><span>${ic(o.k==="call"?"clock":"cal")}${esc(o.when)}</span></div>
+  <p class="soft" style="font-size:14px">${esc(o.what)}</p>
+  <div class="chips">${o.p.map(k=>`<span class="tag ${P[k].t}">${P[k].l}</span>`).join("")}</div>
+  <div class="row"><span class="example">Looking for: ${o.p.map(k=>P[k].l.toLowerCase()).join(", ")}</span><button class="btn btn-dark" data-go="matchmaking">Find partners ${ic("arrow")}</button></div>
+ </article>`).join("")}</div>`;
+};
+
+function seedMsgs(){return [
+ {who:"SR",c:"var(--art)",t:"The filter sketch is ready. Who has data on materials?"},
+ {ai:true,t:"14 studies analysed. Two materials fit your sketch."},
+ {doc:true}
+];}
+R.space=()=>{
+ if(!S.msgs)S.msgs=seedMsgs();
+ const team=[["JK","Jana Keller","Architecture","var(--tech)"],["MS","Dr. M. Santos","Hydrology","var(--sci)"],["LO","L. Okafor","Mechatronics","var(--tech)"],["SR","S. Ruiz","Installation art","var(--art)"]];
+ return `<div class="space">
+  <div class="col side"><div class="colhead"><i>1</i>The team</div>
+   <h3 style="font-size:26px">Polluted water in the Canary Islands</h3>
+   ${team.map(m=>`<div class="member">${av(m[0],m[3])}<div><b>${m[1]}</b><small>${m[2]}</small></div></div>`).join("")}
+   <button class="btn btn-ghost" style="align-self:flex-start" data-go="matchmaking">${ic("plus")} Invite a match</button>
+  </div>
+  <div class="col"><div class="colhead"><i>2</i>The workspace</div>
+   <div class="chat" id="chat">${S.msgs.map(m=>m.doc?`<div class="doc">${ic("book")}<div><b style="font-size:13.5px">Filter materials compared</b><div class="check">${ic("check")} checked by M. Santos</div></div></div>`
+    :m.ai?`<div class="msg"><span class="av" style="background:var(--leaf);color:var(--ink);width:32px;height:32px">${ic("bulb")}</span><div class="bubble ai"><b>AI assistant</b>${esc(m.t)}</div></div>`
+    :m.mine?`<div class="msg mine">${av("JK","var(--tech)",32)}<div class="bubble me">${esc(m.t)}</div></div>`
+    :`<div class="msg">${av(m.who,m.c,32)}<div class="bubble">${esc(m.t)}</div></div>`).join("")}</div>
+   <form class="composer" id="composer"><input id="msg" placeholder="Message the team …" maxlength="300" autocomplete="off" aria-label="Message the team"><button type="submit" aria-label="Send">${ic("send")}</button></form>
+  </div>
+  <div class="col side"><div class="colhead"><i>3</i>Shared AI</div>
+   <div class="quota"><b id="quota">62&nbsp;%</b><span class="soft" style="font-size:13px">quota left this month</span></div>
+   <div class="meter"><i id="meter"></i></div>
+   <div class="feat">${ic("lock")}<div><b>Servers in the EU <span class="goal">Goal</span></b><span class="soft">Data stays in Europe</span></div></div>
+   <div class="feat">${ic("chat")}<div><b>European model <span class="goal">Goal</span></b><span class="soft">For everyone in the space</span></div></div>
+   <div class="feat">${ic("db")}<div><b>Own model: Water <span class="goal">Goal</span></b><span class="soft">Trained together</span></div></div>
+   <button class="btn btn-dark" style="margin-top:auto" data-share>Share outcome</button>
+  </div></div>`;
+};
+
+R.outcomes=()=>`
+ <form class="search" id="oc-search" role="search">${ic("search")}<input value="Water, coast, heat …" aria-label="Search outcomes" autocomplete="off"><button class="btn btn-green" type="submit">Search</button></form>
+ <article class="outcome" data-comment-target>
+  <div class="vis"><svg width="150" height="200" viewBox="0 0 300 400" role="img" aria-label="Murky water passes through three filter stages and comes out clear"><path d="M150 26C150 26 118 66 118 88a32 32 0 0 0 64 0C182 66 150 26 150 26Z" fill="#8C7A5B"/><rect x="64" y="146" width="172" height="44" rx="12" fill="#B8863B"/><rect x="64" y="202" width="172" height="44" rx="12" fill="#2F5D8A"/><rect x="64" y="258" width="172" height="44" rx="12" fill="#3E8A78"/><path d="M150 124v16M150 192v8M150 248v8M150 304v16" stroke="#2F7A57" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M150 330c0 0-26 32-26 46a26 26 0 0 0 52 0c0-14-26-46-26-46Z" fill="#BFE3F2" stroke="#2F5D8A" stroke-width="2"/></svg></div>
+  <div class="body">
+   <span><span class="tag t-tech">Published · Project space Water</span></span>
+   <h3>Mobile filter stage for polluted water</h3>
+   <p class="soft">Three stages, local materials. Developed by an architect, a hydrologist, a mechatronics engineer, and an installation artist.</p>
+   <div class="similar">${ic("link")}<span><b>Similar problem found:</b> riverbed in Bremen-Nord</span></div>
+   <div style="display:flex;gap:10px;flex-wrap:wrap">
+    <button class="btn ${S.adopted?"btn-ghost":"btn-dark"}" id="adopt" ${S.adopted?"disabled":""}>${S.adopted?ic("check")+" Added to your project":"Adopt for my project"}</button>
+    <button class="btn btn-line" data-go="space">See how it was made</button>
+   </div>
+  </div>
+ </article>
+ <div class="minis">
+  <div class="mini" data-comment-target><b>Shade architecture against urban heat</b><span class="tag t-sci">City · Climate</span></div>
+  <div class="mini" data-comment-target><b>Coastal protection with art reefs</b><span class="tag t-art">Coast · Art</span></div>
+ </div>`;
+
+R.membership=()=>`
+ <div class="tiers">
+  ${[["For people","Individual","Price open","var(--art)",["Profile with skills, needs, and offers","Matchmaking, events, and recordings","Personal AI quota (goal)"],"Become a member"],
+     ["For organisations","Institution","Price open","var(--sci)",["All staff included","Find partner institutions across disciplines","A say in how the platform evolves"],"Become a member"],
+     ["For funders","Partner","Price open, in discussion","var(--tech)",["Shape the platform and its rules","Project spaces and shared AI infrastructure","Help select pilot projects"],"Get in touch"]].map(t=>`
+  <div class="tier" style="--c:${t[3]}" data-comment-target><span class="for">${t[0]}</span><h3>${t[1]}</h3><span class="price">${t[2]}</span><ul>${t[4].map(b=>`<li>${b}</li>`).join("")}</ul><button class="btn btn-line" data-member="${t[1]}">${t[5]}</button></div>`).join("")}
+ </div>
+ <p class="example">Example model, inspired by the Society for Artistic Research · prices and benefits open</p>
+ <div class="launch" data-comment-target>
+  <div class="datebox"><b>DEC</b><span>2026</span></div>
+  <div><h3>Platform Launch</h3><p class="soft">GERICS, Hamburg · for potential members from art, science, technology, society, and funding · exact date to be confirmed</p></div>
+  <button class="btn ${S.interest?"btn-ghost":"btn-dark"}" id="interest" ${S.interest?"disabled":""}>${S.interest?ic("check")+" Interest noted":"Register interest"}</button>
+ </div>
+ ${S.interest?`<p class="soft" style="font-size:14px">In this prototype nothing is sent. At launch, registration opens here.</p>`:""}
+ <div class="reasons">
+  <div><h3>Raise your profile</h3><p>Connect with Europe’s art, science, and technology communities.</p></div>
+  <div><h3>Co-create</h3><p>Help shape the platform and its community from day one.</p></div>
+  <div><h3>Expand your network</h3><p>Discover new partners, skills, and project opportunities across Europe.</p></div>
+ </div>`;
+
+function heroArt(){return `<svg class="art" viewBox="900 60 1020 1000" aria-hidden="true">
+ <defs><radialGradient id="g" cx=".36" cy=".3" r=".8"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset=".5" stop-color="#EAF6EF" stop-opacity=".45"/><stop offset="1" stop-color="#6FB38E" stop-opacity=".38"/></radialGradient>
+ <linearGradient id="pt" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#9FD3B0" stop-opacity=".75"/><stop offset="1" stop-color="#4F9E77" stop-opacity=".3"/></linearGradient></defs>
+ <g fill="none" stroke="#2F7A57" stroke-width="1.5"><ellipse cx="1330" cy="560" rx="640" ry="230" transform="rotate(-18 1330 560)" stroke-opacity=".2" stroke-dasharray="4 10"/><ellipse cx="1330" cy="560" rx="300" ry="300" stroke-opacity=".12" stroke-dasharray="2 8"/></g>
+ <path d="M930 1080C1000 760 1180 600 1420 560c220-40 380-180 500-260v220c-160 80-320 180-490 200-190 25-330 160-370 360Z" fill="url(#pt)"/>
+ <g stroke="#2F7A57" stroke-opacity=".38" stroke-width="1.5" fill="none"><path d="M1080 330L1330 560 1640 330 1840 620 1560 800 1330 560 1170 820 1560 800M1080 330l130-160 430 160m0 0 140-130m60 420 60 220-340-40M1170 820l-170-120 80-370m130-160 210-50 220 210M1000 700l330-140"/></g>
+ <g><circle class="node-pulse" cx="1210" cy="170" r="9" fill="#B8863B"/><circle class="node-pulse" style="animation-delay:-1s" cx="1420" cy="120" r="7" fill="#2F5D8A"/><circle class="node-pulse" style="animation-delay:-2s" cx="1780" cy="200" r="8" fill="#3E8A78"/><circle class="node-pulse" style="animation-delay:-3s" cx="1000" cy="700" r="9" fill="#2F5D8A"/><circle class="node-pulse" style="animation-delay:-1.5s" cx="1900" cy="840" r="8" fill="#B8863B"/><circle class="node-pulse" style="animation-delay:-2.5s" cx="940" cy="520" r="6" fill="#A5533F"/></g>
+ <g stroke="#fff" stroke-opacity=".9" stroke-width="2"><circle cx="1330" cy="560" r="200" fill="url(#g)"/><circle cx="1640" cy="330" r="112" fill="url(#g)"/><circle cx="1080" cy="330" r="82" fill="url(#g)"/><circle cx="1560" cy="800" r="128" fill="url(#g)"/><circle cx="1170" cy="820" r="62" fill="url(#g)"/><circle cx="1840" cy="620" r="74" fill="url(#g)"/></g>
+ <circle cx="1285" cy="560" r="96" fill="#B8863B" fill-opacity=".22"/><circle cx="1375" cy="560" r="96" fill="#2F5D8A" fill-opacity=".2"/>
+ <path d="M1330 480c30 40 30 120 0 160-30-40-30-120 0-160Z" fill="#3E8A78" fill-opacity=".55"/>
+ <g fill="#fff" fill-opacity=".75"><ellipse cx="1262" cy="470" rx="62" ry="26" transform="rotate(-32 1262 470)"/><ellipse cx="1600" cy="282" rx="34" ry="14" transform="rotate(-32 1600 282)"/><ellipse cx="1517" cy="752" rx="38" ry="16" transform="rotate(-32 1517 752)"/></g>
+</svg>`;}
+
+/* ---------- Guide ---------- */
+function renderGuide(v){
+ const i=VIEWS.indexOf(v),prev=VIEWS[i-1],next=VIEWS[i+1];
+ $("#guide").innerHTML=`
+  <h1>${esc(v.title)}</h1>
+  <p class="lede">${esc(v.lede)}</p>
+  <div class="steps">${v.steps.map((s,n)=>`<div class="step"><i>${n+1}</i><div><b>${esc(s[0])}</b><span>${esc(s[1])}</span></div></div>`).join("")}</div>
+  <div class="try">${ic("eye")}<span><b>Try it:</b> ${esc(v.tryit)}</span></div>
+  <div class="guide-foot">
+   <div class="tourbar"><span class="count">Tour ${i+1} of ${VIEWS.length}</span>
+    <button class="btn btn-ghost" data-go="${prev?prev.id:""}" ${prev?"":"disabled"} aria-label="Previous view">${ic("back")}</button>
+    ${next?`<button class="btn btn-dark" data-go="${next.id}">Next: ${esc(next.nav)} ${ic("arrow")}</button>`:`<button class="btn btn-dark" data-go="home">Back to start ${ic("arrow")}</button>`}</div>
+   <button class="btn btn-line" id="fb-guide" style="align-self:flex-start">${ic("chat")} Comment on this view</button>
+   <span class="feedback-note" id="fb-note">Tell us what works and what is missing. Every comment helps shape the platform.</span>
+  </div>`;
+}
+
+/* ---------- Router ---------- */
+let current="home";
+function go(target,opts){
+ if(!target)return;
+ const [id,sub]=String(target).split(":");
+ if(!byId[id])return;
+ if(sub){if(id==="opportunities")S.oppTab=sub;if(id==="matchmaking")S.filter=sub;}
+ current=id;
+ const v=byId[id];
+ $("#nav").querySelectorAll("button").forEach(b=>b.setAttribute("aria-current",b.dataset.go===id?"page":"false"));
+ const nav=$("#nav"),cur=nav.querySelector(`[data-go="${id}"]`);if(cur){nav.scrollTo({left:Math.max(0,cur.offsetLeft-nav.clientWidth/2+cur.offsetWidth/2),behavior:"smooth"});}
+ $("#screen-title").textContent=v.win;
+ renderGuide(v);
+ render(true);
+ try{history.replaceState(null,"","#"+id);}catch(e){}
+ if(!opts||!opts.keepScroll){const top=document.querySelector(".shell").getBoundingClientRect().top+window.scrollY-90;if(window.scrollY>top)window.scrollTo({top:Math.max(0,top),behavior:"smooth"});}
+ try{localStorage.setItem("ase-view",id);}catch(e){}
+}
+function render(animate){
+ const el=$("#view");
+ el.innerHTML=R[current]();
+ if(animate){el.classList.remove("enter");void el.offsetWidth;el.classList.add("enter");}
+ if(current==="space"){const c=$("#chat");if(c)c.scrollTop=c.scrollHeight;}
+}
+$("#nav").innerHTML=VIEWS.map(v=>`<button data-go="${v.id}">${esc(v.nav)}</button>`).join("");
+
+/* ---------- Events ---------- */
+document.addEventListener("click",e=>{
+ const g=e.target.closest("[data-go]");
+ if(g){e.preventDefault();if(g.dataset.go)go(g.dataset.go);return;}
+ const t=e.target;
+ const f=t.closest("[data-filter]");if(f){S.filter=f.dataset.filter;render();return;}
+ const rq=t.closest("[data-request]");if(rq){S.requested[rq.dataset.request]=true;render();toast("Conversation requested. In the live platform the other side gets a message.");return;}
+ const pt=t.closest("[data-ptab]");if(pt){S.profTab=pt.dataset.ptab;render();return;}
+ const br=t.closest("[data-bring]");if(br){const k=br.dataset.bring;S.bring[k]=!S.bring[k];render();return;}
+ const et=t.closest("[data-etab]");if(et){S.evTab=et.dataset.etab;render();return;}
+ const ot=t.closest("[data-otab]");if(ot){S.oppTab=ot.dataset.otab;render();return;}
+ const mb=t.closest("[data-member]");if(mb){toast(`${mb.dataset.member} membership: prices and benefits are set in the founding workshop.`);return;}
+ if(t.closest("#suggest")){S.suggested=["Coastal protection","Participatory design","Local materials"];render();return;}
+ if(t.closest("#confirm-skills")){S.skills=S.skills.concat(S.suggested);S.suggested=[];S.progress=95;render();toast("Skills confirmed. Your profile now shows up for more matches.");return;}
+ if(t.closest("#discard-skills")){S.suggested=[];render();return;}
+ if(t.closest("#seat")){S.seat=!S.seat;render();if(S.seat)toast("Seat saved for “Water, data, sculpture”.");return;}
+ if(t.closest("#adopt")){S.adopted=true;render();toast("Outcome added to your project space.");return;}
+ if(t.closest("#interest")){S.interest=true;render();toast("Interest noted for the Platform Launch.");return;}
+ if(t.closest("[data-share]")){go("outcomes");toast("Outcome shared. Others with a similar problem can now find it.");return;}
+ if(t.closest("#fb-guide")||t.closest("#fb-ribbon")){openFeedback(t.closest("button"));return;}
+});
+document.addEventListener("submit",e=>{
+ e.preventDefault();
+ const f=e.target;
+ if(f.id==="home-search"){const v=$("#q-home").value.trim();if(v)S.query=v;S.filter="all";go("matchmaking");return;}
+ if(f.id==="mm-search"){const v=$("#q-mm").value.trim();if(v)S.query=v;render();return;}
+ if(f.id==="oc-search"){toast("Search across shared outcomes. In the prototype the results are fixed.");return;}
+ if(f.id==="composer"){
+  const v=$("#msg").value.trim();if(!v)return;
+  S.msgs.push({mine:true,t:v});render();
+  const q=$("#quota"),m=$("#meter");
+  setTimeout(()=>{S.msgs.push({ai:true,t:"Found 3 relevant studies for your question. Summary is in the files, waiting for a team member to check it."});if(current==="space"){render();const q2=$("#quota"),m2=$("#meter");if(q2){q2.innerHTML="61&nbsp;%";m2.style.width="61%";}}},900);
+  return;
+ }
+});
+
+/* ---------- Feedback via claude.ai comments ---------- */
+const FEEDBACK_DOC="https://docs.google.com/document/d/1jFCp0H6xiPv2NsNr3CpyDCC4AROZPMLV4O9V42jxRS8/edit";
+let commentsApi=null,commentsChecked=false;
+(async()=>{try{commentsApi=window.claude&&window.claude.use?await window.claude.use("comments"):null;}catch(e){commentsApi=null;}commentsChecked=true;})();
+async function openFeedback(btn){
+ const note=$("#fb-note");
+ if(!commentsApi){
+  const w=window.open(FEEDBACK_DOC,"_blank","noopener");
+  if(!w&&note)note.innerHTML='Feedback document: <a href="'+FEEDBACK_DOC+'" target="_blank" rel="noopener">open it here</a>.';
+  return;
+ }
+ try{
+  const r=await commentsApi.openComposer({element:$("#view")});
+  if(!r||!r.opened){toast("Click into the page once, then try again.");}
+ }catch(e){toast("Commenting is not available in this view.");}
+}
+
+/* ---------- Boot ---------- */
+let start="home";
+const h=(location.hash||"").replace("#","");
+if(byId[h])start=h;
+go(start,{keepScroll:true});
+window.addEventListener("hashchange",()=>{const k=(location.hash||"").replace("#","");if(byId[k]&&k!==current)go(k);});
+})();
+</script>
+
+</body>
+</html>
