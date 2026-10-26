@@ -304,9 +304,9 @@ footer.foot .inner{display:flex;justify-content:space-between;gap:16px;flex-wrap
 .ez{--night:#0B1420;--abyss:#050A10;--foam:#FFFFFF;--foam-2:rgba(255,255,255,.86);--foam-3:rgba(255,255,255,.66);--hair:rgba(255,255,255,.22);--ink:#0E1A24;
   position:relative;overflow:hidden;color:var(--foam-3);font-family:"Geist",system-ui,-apple-system,"Segoe UI",sans-serif;isolation:isolate;
   background:linear-gradient(180deg,var(--night) 0%,#08111B 46%,var(--abyss) 100%)}
-.ez::before{content:"";position:absolute;inset:auto -10% 40% -10%;height:220px;z-index:-1;pointer-events:none;
-  background:radial-gradient(40% 50% at 70% 50%,rgba(191,224,242,.20),rgba(11,74,111,.18) 45%,transparent 72%)}
-.ez::after{content:"";position:absolute;left:0;right:0;bottom:40%;height:1px;z-index:-1;background:linear-gradient(90deg,transparent,rgba(255,255,255,.18) 25%,rgba(255,255,255,.5) 70%,transparent)}
+.ez::before{content:"";position:absolute;right:-10%;top:-30%;width:70%;height:90%;z-index:-1;pointer-events:none;
+  background:radial-gradient(50% 50% at 50% 50%,rgba(191,224,242,.16),rgba(11,74,111,.16) 45%,transparent 72%)}
+.ez::after{content:"";position:absolute;left:0;right:0;top:0;height:1px;z-index:-1;background:linear-gradient(90deg,transparent,rgba(255,255,255,.14) 30%,rgba(255,255,255,.34) 72%,transparent)}
 .ez ::selection{background:#BFE0F2;color:var(--ink)}
 .ez .inner{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:40px 64px;align-items:end;padding-block:72px 32px}
 .ez-mark{display:inline-flex;align-items:center;gap:10px;color:var(--foam);text-decoration:none;font-weight:600;font-size:17px;letter-spacing:-.01em}
@@ -321,7 +321,7 @@ footer.foot .inner{display:flex;justify-content:space-between;gap:16px;flex-wrap
 .ez-base{grid-column:1/-1;display:flex;justify-content:space-between;gap:12px 24px;flex-wrap:wrap;border-top:1px solid var(--hair);padding-top:18px;font-size:14px;line-height:1.6}
 .ez-base a{color:var(--foam-2);text-decoration:none}
 .ez-base a:hover{text-decoration:underline;text-underline-offset:3px}
-@media (max-width:720px){.ez .inner{grid-template-columns:1fr;padding-block:56px 28px}.ez::before{bottom:52%}.ez::after{bottom:59%}}
+@media (max-width:720px){.ez .inner{grid-template-columns:1fr;padding-block:56px 28px}.ez::before{width:120%;right:-40%}}
 
 /* Responsive */
 @media (max-width:1080px){
@@ -345,6 +345,7 @@ footer.foot .inner{display:flex;justify-content:space-between;gap:16px;flex-wrap
   .hero{padding:26px 20px 22px;min-height:300px}
   .hero svg.art{width:110%;right:-40%;top:-20px;opacity:.75}
   .areas{grid-template-columns:1fr 1fr}
+  .area:last-child{grid-column:1/-1}
   .flow{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:18px}
   .flow::before{display:none}
   .launch{grid-template-columns:auto 1fr}
@@ -550,7 +551,7 @@ R.home=()=>`
 
 R.matchmaking=()=>{
  const q=S.query.toLowerCase().split(/\s+/).filter(w=>w.length>2);
- let list=PEOPLE.filter(x=>S.filter==="all"||(S.filter==="inst"&&x.kind==="inst")||(S.filter==="res"&&x.kind==="res")||(x.kind==="person"&&x.p===S.filter));
+ let list=PEOPLE.filter(x=>S.filter==="all"||(S.filter==="inst"&&x.kind==="inst")||(S.filter==="res"&&x.kind==="res")||x.p===S.filter);
  list=list.map(x=>({x,score:q.reduce((n,w)=>n+((x.kw+" "+x.role+" "+x.why).toLowerCase().includes(w)?1:0),0)})).filter(o=>!q.length||o.score>0).sort((a,b)=>b.score-a.score);
  const chips=[["all","All"],["art","Art"],["sci","Science"],["tech","Technology"],["soc","Society"],["inst","Institutions"],["res","Residencies"]];
  return `
