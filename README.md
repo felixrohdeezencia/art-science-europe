@@ -4,7 +4,7 @@ Concept prototype of the **European Art-Science-Tech Platform for Climate Transf
 
 **Open it:** https://felixrohdeezencia.github.io/art-science-europe/
 
-Eight views with a guided tour: Homepage, Matchmaking, Profiles, Events, Open Calls & Residencies, Project Space, Shared outcomes, Membership. Each view explains itself on the left; the platform on the right is clickable.
+Eight views with a guided tour, in German (default) and English (`?lang=en`). Each view explains itself on the left; the platform on the right is clickable.
 
 All people, organisations, dates and numbers are fictional examples. European hosting of the shared AI is a goal, not a decision. Membership prices are open.
 

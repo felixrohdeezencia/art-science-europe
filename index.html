@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="de">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -35,7 +35,7 @@ body{margin:0;background:var(--paper);color:var(--ink);font:400 15px/1.55 var(--
 button,input,textarea{font:inherit;color:inherit}
 button{cursor:pointer;background:none;border:0;padding:0}
 a{color:var(--green);text-underline-offset:3px}
-h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.05;margin:0;text-wrap:balance;letter-spacing:-.01em}
+h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.05;margin:0;text-wrap:balance;letter-spacing:-.01em;hyphens:auto;-webkit-hyphens:auto;overflow-wrap:break-word}
 p{margin:0}
 .wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 .inner{max-width:1320px;margin:0 auto}
@@ -59,7 +59,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .brand-sub{display:block;font-family:var(--text);font-size:11px;color:var(--muted);letter-spacing:.04em;margin-top:2px}
 .nav{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;flex:1;min-width:0;mask-image:linear-gradient(90deg,#000 92%,transparent)}
 .nav::-webkit-scrollbar{display:none}
-.nav button{white-space:nowrap;padding:8px 12px;border-radius:999px;font-size:14px;color:var(--ink-soft);transition:background .2s,color .2s}
+.nav button{white-space:nowrap;padding:8px 11px;border-radius:999px;font-size:14px;color:var(--ink-soft);transition:background .2s,color .2s}
 .nav button:hover{background:var(--mint);color:var(--ink)}
 .nav button[aria-current="page"]{background:var(--ink);color:var(--paper)}
 .me{flex:none;display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink-soft)}
@@ -68,7 +68,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 /* Shell */
 .shell{display:grid;grid-template-columns:minmax(0,330px) minmax(0,1fr);gap:40px;padding-block:36px 64px;align-items:start}
 .guide{position:sticky;top:calc(env(safe-area-inset-top,0px) + 88px);display:flex;flex-direction:column;gap:18px}
-.guide h1{font-size:clamp(40px,4.4vw,60px);font-weight:400;letter-spacing:-.02em}
+.guide h1{hyphens:manual;-webkit-hyphens:manual;font-size:clamp(38px,3.9vw,56px);font-weight:400;letter-spacing:-.02em}
 .guide .lede{font-size:17px;line-height:1.55;color:var(--ink-soft);max-width:34ch}
 .guide .steps{display:flex;flex-direction:column;gap:12px;border-top:1px solid var(--line);padding-top:16px}
 .guide .step{display:grid;grid-template-columns:26px 1fr;gap:10px;align-items:start}
@@ -323,6 +323,12 @@ footer.foot .inner{display:flex;justify-content:space-between;gap:16px;flex-wrap
 .ez-base a:hover{text-decoration:underline;text-underline-offset:3px}
 @media (max-width:720px){.ez .inner{grid-template-columns:1fr;padding-block:56px 28px}.ez::before{width:120%;right:-40%}}
 
+.lang{display:flex;gap:2px;flex:none;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--panel)}
+.lang button{min-width:36px;padding:5px 9px;border-radius:999px;font-size:12.5px;font-weight:600;letter-spacing:.04em;color:var(--muted);transition:background .2s,color .2s}
+.lang button:hover{color:var(--ink)}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.ez-claim-link{color:inherit;text-decoration:none}
+.ez-claim-link:hover{color:#DCEEF8}
 /* Responsive */
 @media (max-width:1080px){
   .shell{display:flex;flex-direction:column;gap:18px;padding-block:22px 48px}
@@ -338,6 +344,10 @@ footer.foot .inner{display:flex;justify-content:space-between;gap:16px;flex-wrap
 }
 @media (max-width:720px){
   .me>span:first-child{display:none}
+  .brand{margin-right:auto}
+  .brand-name{font-size:19px}
+  .lang button{min-width:32px;padding:5px 7px}
+  .hero h2{font-size:38px;hyphens:manual;-webkit-hyphens:manual}
   .brand-sub{display:none}
   .appbar .inner{flex-wrap:wrap;gap:8px 12px;padding-block:8px}
   .nav{order:3;flex-basis:100%}
@@ -370,29 +380,30 @@ footer.foot .inner{display:flex;justify-content:space-between;gap:16px;flex-wrap
 
 <div class="ribbon wrap">
   <div class="inner">
-    <span><b>Prototype</b> · clickable concept · all people, organisations, dates and numbers are fictional examples</span>
+    <span data-t="ribbon"></span>
     <span class="actions">
-      <button class="chipbtn" id="fb-ribbon" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>Comment on this view</button>
+      <button class="chipbtn" id="fb-ribbon" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg><span data-t="comment"></span></button>
     </span>
   </div>
 </div>
 
 <header class="appbar wrap">
   <div class="inner">
-    <a class="brand" href="#home" data-go="home" aria-label="Art-Science Europe home">
+    <a class="brand" href="#home" data-go="home" data-t-aria="brandAria">
       <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><circle cx="13" cy="16" r="9" fill="#B8863B" fill-opacity=".35"/><circle cx="19" cy="16" r="9" fill="#2F5D8A" fill-opacity=".3"/><path d="M16 9c2.6 2.7 2.6 11.3 0 14-2.6-2.7-2.6-11.3 0-14Z" fill="#2F7A57"/></svg>
       <span><span class="brand-name">Art-Science Europe</span><span class="brand-sub">Climate Transformation</span></span>
     </a>
-    <nav class="nav" id="nav" aria-label="Platform"></nav>
-    <button class="me" data-go="profile" type="button" aria-label="My profile"><span>Jana Keller</span><span class="av" style="background:var(--tech)">JK</span></button>
+    <nav class="nav" id="nav" data-t-aria="navAria"></nav>
+    <div class="lang" role="group" data-t-aria="langAria"><button type="button" data-lang="de" lang="de">DE</button><button type="button" data-lang="en" lang="en">EN</button></div>
+    <button class="me" data-go="profile" type="button" data-t-aria="meAria"><span>Jana Keller</span><span class="av" style="background:var(--tech)">JK</span></button>
   </div>
 </header>
 
 <main class="wrap">
   <div class="inner shell">
     <aside class="guide" id="guide" aria-live="polite"></aside>
-    <section class="screen" aria-label="Platform view">
-      <div class="screen-bar"><i></i><i></i><i></i><span id="screen-title">Art-Science Europe</span><em>Prototype view · example content</em></div>
+    <section class="screen" data-t-aria="screenAria">
+      <div class="screen-bar"><i></i><i></i><i></i><span id="screen-title">Art-Science Europe</span><em data-t="screenNote"></em></div>
       <div class="view" id="view" data-comment-target></div>
     </section>
   </div>
@@ -400,22 +411,22 @@ footer.foot .inner{display:flex;justify-content:space-between;gap:16px;flex-wrap
 
 <footer class="foot wrap">
   <div class="inner">
-    <span>Initiated and coordinated by GERICS – Climate Service Center Germany, Helmholtz</span>
-    <span>First draft by Disruptive Consciousness · Concept prototype, October 2026</span>
+    <span data-t="footL"></span>
+    <span data-t="footR"></span>
   </div>
 </footer>
 
 <section class="ez wrap" aria-label="Ezencia">
   <div class="inner">
     <div>
-      <a class="ez-mark" href="https://felixrohde.com" target="_blank" rel="noopener"><img src="data:image/png;base64,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" width="28" height="28" alt="">Ezencia</a>
-      <p class="ez-claim">Menos capas,<br>más esencia.</p>
+      <a class="ez-mark ez-link" href="https://felixrohde.com/" target="_blank" rel="noopener"><img src="data:image/png;base64,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" width="28" height="28" alt="">Ezencia</a>
+      <p class="ez-claim"><a class="ez-link ez-claim-link" href="https://felixrohde.com/" target="_blank" rel="noopener" data-t-html="ezClaim"></a></p>
     </div>
     <div class="ez-side">
-      <p><b>Prototype designed and built by Ezencia.</b> Felix Rohde listens first, finds the core, and connects everything that grows from it: brand, platform, and AI that takes work off people’s plates.</p>
-      <a class="ez-pill" href="https://felixrohde.com" target="_blank" rel="noopener">felixrohde.com<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 12h15m-5.5-6 6 6-6 6"/></svg></a>
+      <p data-t-html="ezSide"></p>
+      <a class="ez-pill ez-link" href="https://felixrohde.com/" target="_blank" rel="noopener">felixrohde.com<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 12h15m-5.5-6 6 6-6 6"/></svg></a>
     </div>
-    <div class="ez-base"><span>Felix Rohde · Tabaiba, Tenerife · <a href="mailto:felix@felixrohde.com">felix@felixrohde.com</a></span><span>Primero la esencia, después todo lo demás.</span></div>
+    <div class="ez-base"><span><a class="ez-link" href="https://felixrohde.com/" target="_blank" rel="noopener">Felix Rohde</a> · Tabaiba, <span data-t="tenerife"></span> · <a href="mailto:felix@felixrohde.com">felix@felixrohde.com</a></span><span data-t="ezCore"></span></div>
   </div>
 </section>
 
@@ -447,82 +458,224 @@ clock:'<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>',
 check:'<path d="M20 6 9 17l-5-5"/>',
 sparkle:'<path d="M12 3l1.9 5.8L20 10.7l-6.1 1.9L12 18.5l-1.9-5.9L4 10.7l6.1-1.9Z"/>',
 plus:'<path d="M12 5v14M5 12h14"/>',
-x:'<path d="M18 6 6 18M6 6l12 12"/>',
 eye:'<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/>'
 };
 const ic=(n,c)=>`<svg class="icon ${c||''}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${I[n]}</svg>`;
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const P={art:{l:"Art",c:"var(--art)",t:"t-art"},sci:{l:"Science",c:"var(--sci)",t:"t-sci"},tech:{l:"Technology",c:"var(--tech)",t:"t-tech"},soc:{l:"Society",c:"var(--soc)",t:"t-soc"}};
+
+/* ---------- Language ---------- */
+const LANGS=["de","en"];
+let lang="de";
+try{const q=new URLSearchParams(location.search).get("lang");if(LANGS.includes(q))lang=q;else{const s=localStorage.getItem("ase-lang");if(LANGS.includes(s))lang=s;}}catch(e){}
+
+/* UI strings. German is the default; English follows Anke's v2 wording. */
+const T={
+de:{
+ ribbon:"<b>Prototyp</b> · klickbares Konzept · alle Personen, Organisationen, Termine und Zahlen sind fiktive Beispiele",
+ comment:"Diese Ansicht kommentieren", brandAria:"Art-Science Europe, Startseite", navAria:"Plattform", langAria:"Sprache", meAria:"Mein Profil", screenAria:"Ansicht der Plattform",
+ screenNote:"Prototyp-Ansicht · Beispielinhalte",
+ footL:"Initiiert und koordiniert von GERICS – Climate Service Center Germany, Helmholtz",
+ footR:"Erster Entwurf von Disruptive Consciousness · Konzeptprototyp, Oktober 2026",
+ ezClaim:"Weniger Schichten,<br>mehr Essenz.",
+ ezSide:"<b>Prototyp entworfen und gebaut von Ezencia.</b> Felix Rohde hört zuerst zu, findet den Kern und verbindet alles, was daraus wächst: Marke, Plattform und KI, die Menschen Arbeit abnimmt.",
+ tenerife:"Teneriffa", ezCore:"Erst die Essenz, dann alles andere.",
+ tryLabel:"Ausprobieren:", tour:(i,n)=>`Tour ${i} von ${n}`, next:n=>`Weiter: ${n}`, restart:"Zurück zum Start", prev:"Vorherige Ansicht",
+ fbNote:"Sagen Sie uns, was funktioniert und was fehlt. Jeder Kommentar hilft, die Plattform zu gestalten.",
+ fbOpen:"Feedback-Dokument: <a href=\"{u}\" target=\"_blank\" rel=\"noopener\">hier öffnen</a>.",
+ toastFocus:"Bitte einmal in die Seite klicken und erneut versuchen.", toastNoComments:"Kommentieren ist in dieser Ansicht nicht verfügbar.",
+ search:"Suchen", searchPh:"Expertise, Projekte oder Möglichkeiten finden …", searchAria:"Suche",
+ heroH:"Wo Kunst auf Wissenschaft trifft.", claim:"Expertise verbinden. Zusammenarbeit ermöglichen. Neue Möglichkeiten schaffen.",
+ open:"Öffnen", howH:"So funktioniert es",
+ areas:[["Kunst trifft Wissenschaft","Kuratierte Profile von Künstler:innen, Wissenschaftler:innen und Institutionen."],["Events","Ein europäischer Kalender für Ausstellungen, Konferenzen und Webinare."],["Ausschreibungen & Projekte","Calls, Förderungen und Kooperationsangebote."],["Residenzprogramme","Programme, in denen Kunst und Forschung zusammenarbeiten."],["Austausch & Zusammenarbeit","Erste Projektideen, Partnersuche und gemeinsame Räume."]],
+ flow:[["Herausforderung","Ein Ausgangspunkt für Zusammenarbeit"],["Entdecken","Menschen, Wissen und Möglichkeiten"],["Verbinden","Perspektiven, die zusammenfinden"],["Entwickeln","Ideen und Projektkonzepte"],["Umsetzen","Förderung, Piloten und Partnerschaften"],["Wirkung","Projekte, die Transformation voranbringen"]],
+ launchH:"Plattform-Launch", launchHome:"Climate Service Center Germany (GERICS), Hamburg · mit einer interaktiven Medieninstallation", register:"Interesse anmelden", registered:"Interesse vorgemerkt",
+ defaultQuery:"Küstenerosion trifft Installationskunst",
+ chips:[["all","Alle"],["art","Kunst"],["sci","Wissenschaft"],["tech","Technologie"],["soc","Gesellschaft"],["inst","Institutionen"],["res","Residenzen"]], filterAria:"Filter",
+ matches:(n,q)=>`${n} ${n===1?"Treffer":"Treffer"} für „${q}“`, why:"Warum es passt:", request:"Gespräch anfragen", requested:"Angefragt", openSpace:"Gemeinsamen Raum öffnen",
+ empty:"Keine Treffer in den Beispieldaten. Versuchen Sie „Küste“, „Daten“ oder „Residenz“.",
+ tagInst:"Institution", tagRes:"Residenz", tagCall:"Ausschreibung",
+ persp:{art:"Kunst",sci:"Wissenschaft",tech:"Technologie",soc:"Gesellschaft"},
+ ptabs:[["person","Person"],["inst","Institution"],["res","Residenz"],["call","Ausschreibung"]],
+ dropH:"Portfolio, CV oder Website hinzufügen", dropP:"Die KI schlägt Fähigkeiten vor. Sie bestätigen oder ändern sie.", useExample:"Beispielportfolio verwenden",
+ janaRole:"Architektin · Teneriffa", complete:"% vollständig", bring:"Ich bringe mit", skills:"Fähigkeiten",
+ baseSkills:["Architektur","Wasseraufbereitung","Prototyping"], suggestSkills:["Küstenschutz","Partizipatives Design","Lokale Materialien"],
+ suggestedFrom:"Aus dem Beispielportfolio vorgeschlagen.", confirmSkills:"Fähigkeiten bestätigen", discard:"Verwerfen",
+ seek:"Ich suche", seekV:"Wissenschaftliche Partner für Küstenschutz", offer:"Ich biete", offerV:"Prototyping, Raumgestaltung, Werkstattzugang",
+ seekNote:"„Ich suche“ und „Ich biete“ steuern die Treffer im Matchmaking.",
+ kindIntro:{inst:"Institutionen beschreiben, was sie in der anderen Disziplin suchen. Kunsthäuser finden Forschungspartner, Forschungsinstitute finden Künstler:innen.",res:"Residenzprogramme nennen Ort, Dauer und worauf Residents Zugriff bekommen.",call:"Ausschreibungen nennen Förderung, Frist und das gesuchte Team."},
+ kindEx:{inst:[["var(--art)","Kunstmuseum sucht Partner aus der Klimaforschung","Kunsthalle Nord · Kiel"],["var(--sci)","Forschungsinstitut sucht Künstler:innen für seine Ozeandaten","Baltic Ocean Institute · Rostock"]],res:[["var(--tech)","Polarstation bietet eine dreimonatige Kunstresidenz","Arctic Field Station · Svalbard"],["var(--tech)","Glaziologie-Labor nimmt Künstler:innen für sechs Wochen auf","Alpine Forschungsstation"]],call:[["var(--soc)","Art-Science-Teams gesucht zum Thema städtische Hitze","Klimaamt der Stadt · Wien"],["var(--soc)","Datengeschichten aus der Nordsee","Stiftung für Meeresforschung"]]},
+ seeOnPlatform:"Auf der Plattform ansehen",
+ etabs:[["cal","Kalender"],["web","Webinare"],["rec","Aufzeichnungen"]],
+ recs:["Küstenschutz","Klima und Kunst","Daten als Material","Städte in der Hitze"],
+ liveBadge:"Live in 2 Tagen", liveH:"Wasser, Daten, Skulptur", liveP:"Forschung trifft Installation. Sprecher:innen aus vier Ländern.", seat:"Platz reservieren", seatDone:"Platz reserviert",
+ recNote:"Jedes Webinar wird aufgezeichnet. Verpasst? Unter Aufzeichnungen ist es weiter abrufbar.", details:"Details",
+ otabs:[["call","Ausschreibungen"],["res","Residenzen"]], lookingFor:"Gesucht:", findPartners:"Partner finden",
+ spaceTitle:"Verschmutztes Wasser auf den Kanaren", team:"Das Team", workspace:"Der Arbeitsraum", sharedAI:"Geteilte KI", invite:"Match einladen",
+ teamRoles:["Architektur","Hydrologie","Mechatronik","Installationskunst"],
+ msg1:"Die Filterskizze ist fertig. Wer hat Daten zu Materialien?", ai1:"14 Studien ausgewertet. Zwei Materialien passen zu eurer Skizze.",
+ aiName:"KI-Assistent", docTitle:"Filtermaterialien im Vergleich", docChecked:"geprüft von M. Santos",
+ msgPh:"Nachricht an das Team …", msgAria:"Nachricht an das Team", send:"Senden",
+ aiReply:"3 passende Studien gefunden. Die Zusammenfassung liegt bei den Dateien und wartet auf die Prüfung durch das Team.",
+ quotaLeft:"Kontingent diesen Monat übrig", goal:"Ziel",
+ feat:[["Server in der EU","Daten bleiben in Europa"],["Europäisches Modell","Für alle im Raum"],["Eigenes Modell: Wasser","Gemeinsam trainiert"]],
+ shareOutcome:"Ergebnis teilen",
+ ocSearch:"Wasser, Küste, Hitze …", ocSearchAria:"Ergebnisse durchsuchen", published:"Veröffentlicht · Projektraum Wasser",
+ ocTitle:"Mobile Filterstufe für verschmutztes Wasser", ocP:"Drei Stufen, lokale Materialien. Entstanden aus Architektur, Hydrologie, Mechatronik und Installationskunst.",
+ similar:"<b>Ähnliches Problem gefunden:</b> Flussbett in Bremen-Nord", adopt:"Für mein Projekt übernehmen", adopted:"Zu Ihrem Projekt hinzugefügt", howMade:"So ist es entstanden",
+ ocAlt:"Trübes Wasser fließt durch drei Filterstufen und kommt klar heraus",
+ minis:[["Schattenarchitektur gegen städtische Hitze","Stadt · Klima"],["Küstenschutz mit Kunstriffen","Küste · Kunst"]],
+ tiers:[["Für Menschen","Einzelmitglied","Preis offen",["Profil mit Fähigkeiten, Suche und Angebot","Matchmaking, Events und Aufzeichnungen","Persönliches KI-Kontingent (Ziel)"],"Mitglied werden"],["Für Organisationen","Institution","Preis offen",["Alle Mitarbeitenden inklusive","Partnerinstitutionen über Disziplinen hinweg finden","Mitsprache bei der Weiterentwicklung"],"Mitglied werden"],["Für Förderer","Partner","Preis offen, in Abstimmung",["Plattform und Regeln mitgestalten","Projekträume und geteilte KI-Infrastruktur","Pilotprojekte mit auswählen"],"Kontakt aufnehmen"]],
+ tierNote:"Beispielmodell, angelehnt an die Society for Artistic Research · Preise und Leistungen offen",
+ launchMember:"GERICS, Hamburg · für künftige Mitglieder aus Kunst, Wissenschaft, Technologie, Gesellschaft und Förderung · genaues Datum folgt",
+ interestNote:"Im Prototyp wird nichts verschickt. Zum Launch öffnet hier die Anmeldung.",
+ reasons:[["Sichtbar werden","Vernetzen Sie sich mit Europas Communities aus Kunst, Wissenschaft und Technologie."],["Mitgestalten","Gestalten Sie Plattform und Community vom ersten Tag an mit."],["Netzwerk erweitern","Entdecken Sie neue Partner, Fähigkeiten und Projektchancen in ganz Europa."]],
+ tRequested:"Gespräch angefragt. Auf der echten Plattform erhält die andere Seite eine Nachricht.",
+ tMember:t=>`${t}: Preise und Leistungen werden im Gründungsworkshop festgelegt.`,
+ tSkills:"Fähigkeiten bestätigt. Ihr Profil erscheint jetzt bei mehr Treffern.", tSeat:"Platz reserviert für „Wasser, Daten, Skulptur“.",
+ tAdopt:"Ergebnis zu Ihrem Projektraum hinzugefügt.", tInterest:"Interesse am Plattform-Launch vorgemerkt.", tShared:"Ergebnis geteilt. Andere mit einem ähnlichen Problem finden es jetzt.",
+ tOcSearch:"Suche in geteilten Ergebnissen. Im Prototyp sind die Ergebnisse fest.",
+ months:{NOV:"NOV",DEC:"DEZ"}
+},
+en:{
+ ribbon:"<b>Prototype</b> · clickable concept · all people, organisations, dates and numbers are fictional examples",
+ comment:"Comment on this view", brandAria:"Art-Science Europe home", navAria:"Platform", langAria:"Language", meAria:"My profile", screenAria:"Platform view",
+ screenNote:"Prototype view · example content",
+ footL:"Initiated and coordinated by GERICS – Climate Service Center Germany, Helmholtz",
+ footR:"First draft by Disruptive Consciousness · Concept prototype, October 2026",
+ ezClaim:"Fewer layers,<br>more essence.",
+ ezSide:"<b>Prototype designed and built by Ezencia.</b> Felix Rohde listens first, finds the core, and connects everything that grows from it: brand, platform, and AI that takes work off people’s plates.",
+ tenerife:"Tenerife", ezCore:"Essence first, then everything else.",
+ tryLabel:"Try it:", tour:(i,n)=>`Tour ${i} of ${n}`, next:n=>`Next: ${n}`, restart:"Back to start", prev:"Previous view",
+ fbNote:"Tell us what works and what is missing. Every comment helps shape the platform.",
+ fbOpen:"Feedback document: <a href=\"{u}\" target=\"_blank\" rel=\"noopener\">open it here</a>.",
+ toastFocus:"Click into the page once, then try again.", toastNoComments:"Commenting is not available in this view.",
+ search:"Search", searchPh:"Find expertise, projects or opportunities …", searchAria:"Search",
+ heroH:"Where art meets science.", claim:"Connecting expertise. Enabling collaboration. Creating new possibilities.",
+ open:"Open", howH:"How it works",
+ areas:[["Art meets Science","Curated profiles of artists, scientists, and institutions."],["Events","A European calendar of exhibitions, conferences, and webinars."],["Open Calls & Projects","Calls, funding, and cooperation offers."],["Artist Residencies","Residency programmes where art and research meet."],["Exchange & Collaboration","First project ideas, partner search, and shared spaces."]],
+ flow:[["Challenge","A starting point for collaboration"],["Discover","People, knowledge, and opportunities"],["Connect","Perspectives brought together"],["Develop","Ideas and project concepts"],["Realize","Funding, pilots, and partnerships"],["Impact","Projects that drive transformation"]],
+ launchH:"Platform Launch", launchHome:"Climate Service Center Germany (GERICS), Hamburg · with an interactive media installation", register:"Register interest", registered:"Interest noted",
+ defaultQuery:"Coastal erosion meets installation art",
+ chips:[["all","All"],["art","Art"],["sci","Science"],["tech","Technology"],["soc","Society"],["inst","Institutions"],["res","Residencies"]], filterAria:"Filter",
+ matches:(n,q)=>`${n} ${n===1?"match":"matches"} for “${q}”`, why:"Why it fits:", request:"Request a conversation", requested:"Requested", openSpace:"Open a shared space",
+ empty:"No matches for this search in the example data. Try “coast”, “data” or “residency”.",
+ tagInst:"Institution", tagRes:"Residency", tagCall:"Open Call",
+ persp:{art:"Art",sci:"Science",tech:"Technology",soc:"Society"},
+ ptabs:[["person","Person"],["inst","Institution"],["res","Residency"],["call","Open Call"]],
+ dropH:"Add portfolio, CV, or website", dropP:"AI suggests skills. You confirm or change them.", useExample:"Use example portfolio",
+ janaRole:"Architect · Tenerife", complete:"% complete", bring:"I bring", skills:"Skills",
+ baseSkills:["Architecture","Water treatment","Prototyping"], suggestSkills:["Coastal protection","Participatory design","Local materials"],
+ suggestedFrom:"Suggested from the example portfolio.", confirmSkills:"Confirm skills", discard:"Discard",
+ seek:"I am looking for", seekV:"Scientific partners for coastal protection", offer:"I offer", offerV:"Prototyping, spatial design, workshop access",
+ seekNote:"“I am looking for” and “I offer” drive the matches in Matchmaking.",
+ kindIntro:{inst:"Institutions describe what they look for in the other discipline. Art institutions find research partners, and research institutes find artists.",res:"Residency programmes list place, duration, and what residents get access to.",call:"Open calls list funding, deadline, and the team they are looking for."},
+ kindEx:{inst:[["var(--art)","Art museum seeks a climate research partner","Kunsthalle Nord · Kiel"],["var(--sci)","Research institute seeks artists for its ocean data","Baltic Ocean Institute · Rostock"]],res:[["var(--tech)","Polar station offers a three-month art residency","Arctic Field Station · Svalbard region"],["var(--tech)","Glaciology lab hosts artists for six weeks","Alpine research station"]],call:[["var(--soc)","Art-Science teams wanted on urban heat","City climate office · Vienna"],["var(--soc)","Data stories from the North Sea","Marine research foundation"]]},
+ seeOnPlatform:"See them on the platform",
+ etabs:[["cal","Calendar"],["web","Webinars"],["rec","Recordings"]],
+ recs:["Coastal protection","Climate and art","Data as material","Cities in heat"],
+ liveBadge:"Live in 2 days", liveH:"Water, data, sculpture", liveP:"Research meets installation. Speakers from four countries.", seat:"Save your seat", seatDone:"Seat saved",
+ recNote:"Every webinar is recorded. Missed one? Find it under Recordings.", details:"Details",
+ otabs:[["call","Open calls"],["res","Residencies"]], lookingFor:"Looking for:", findPartners:"Find partners",
+ spaceTitle:"Polluted water in the Canary Islands", team:"The team", workspace:"The workspace", sharedAI:"Shared AI", invite:"Invite a match",
+ teamRoles:["Architecture","Hydrology","Mechatronics","Installation art"],
+ msg1:"The filter sketch is ready. Who has data on materials?", ai1:"14 studies analysed. Two materials fit your sketch.",
+ aiName:"AI assistant", docTitle:"Filter materials compared", docChecked:"checked by M. Santos",
+ msgPh:"Message the team …", msgAria:"Message the team", send:"Send",
+ aiReply:"Found 3 relevant studies for your question. The summary is in the files, waiting for a team member to check it.",
+ quotaLeft:"quota left this month", goal:"Goal",
+ feat:[["Servers in the EU","Data stays in Europe"],["European model","For everyone in the space"],["Own model: Water","Trained together"]],
+ shareOutcome:"Share outcome",
+ ocSearch:"Water, coast, heat …", ocSearchAria:"Search outcomes", published:"Published · Project space Water",
+ ocTitle:"Mobile filter stage for polluted water", ocP:"Three stages, local materials. Developed across architecture, hydrology, mechatronics, and installation art.",
+ similar:"<b>Similar problem found:</b> riverbed in Bremen-Nord", adopt:"Adopt for my project", adopted:"Added to your project", howMade:"See how it was made",
+ ocAlt:"Murky water passes through three filter stages and comes out clear",
+ minis:[["Shade architecture against urban heat","City · Climate"],["Coastal protection with art reefs","Coast · Art"]],
+ tiers:[["For people","Individual","Price open",["Profile with skills, needs, and offers","Matchmaking, events, and recordings","Personal AI quota (goal)"],"Become a member"],["For organisations","Institution","Price open",["All staff included","Find partner institutions across disciplines","A say in how the platform evolves"],"Become a member"],["For funders","Partner","Price open, in discussion",["Shape the platform and its rules","Project spaces and shared AI infrastructure","Help select pilot projects"],"Get in touch"]],
+ tierNote:"Example model, inspired by the Society for Artistic Research · prices and benefits open",
+ launchMember:"GERICS, Hamburg · for potential members from art, science, technology, society, and funding · exact date to be confirmed",
+ interestNote:"In this prototype nothing is sent. At launch, registration opens here.",
+ reasons:[["Raise your profile","Connect with Europe’s art, science, and technology communities."],["Co-create","Help shape the platform and its community from day one."],["Expand your network","Discover new partners, skills, and project opportunities across Europe."]],
+ tRequested:"Conversation requested. In the live platform the other side gets a message.",
+ tMember:t=>`${t} membership: prices and benefits are set in the founding workshop.`,
+ tSkills:"Skills confirmed. Your profile now shows up for more matches.", tSeat:"Seat saved for “Water, data, sculpture”.",
+ tAdopt:"Outcome added to your project space.", tInterest:"Interest noted for the Platform Launch.", tShared:"Outcome shared. Others with a similar problem can now find it.",
+ tOcSearch:"Search across shared outcomes. In the prototype the results are fixed.",
+ months:{NOV:"NOV",DEC:"DEC"}
+}};
+const t=k=>T[lang][k];
+const P={art:{c:"var(--art)",t:"t-art"},sci:{c:"var(--sci)",t:"t-sci"},tech:{c:"var(--tech)",t:"t-tech"},soc:{c:"var(--soc)",t:"t-soc"}};
+const pl=k=>t("persp")[k];
 
 /* ---------- Example content (fictional) ---------- */
 const PEOPLE=[
- {id:"al",ini:"AL",name:"Dr. Anna Lindqvist",kind:"person",p:"sci",role:"Coastal research · Climate service centre, Hamburg",why:"works on coastal erosion and is looking for an artistic perspective on her data.",kw:"coast coastal erosion data sea"},
- {id:"me",ini:"ME",name:"Mara Eliasson",kind:"person",p:"art",role:"Immersive installations · Tallinn",why:"makes sea-level rise tangible in space and is looking for scientific partners.",kw:"installation art sea level coast immersive"},
- {id:"jw",ini:"JW",name:"Jonas Weber",kind:"person",p:"tech",role:"Data sonification · Berlin",why:"turns sensor data into sound and needs long coastal time series to work with.",kw:"data sound sensor coast technology"},
- {id:"kn",ini:"KN",name:"Kunsthalle Nord",kind:"inst",p:"art",role:"Art museum · Kiel",why:"plans an exhibition on the Baltic coast and seeks a climate research partner.",kw:"museum exhibition coast baltic art institution"},
- {id:"bo",ini:"BO",name:"Baltic Ocean Institute",kind:"inst",p:"sci",role:"Research institute · Rostock",why:"has 30 years of shoreline measurements and seeks artists to make them public.",kw:"ocean data coast erosion research institution"},
- {id:"cm",ini:"CM",name:"Coastal municipality Algarve",kind:"inst",p:"soc",role:"Local government · Portugal",why:"needs participatory formats to discuss managed retreat with residents.",kw:"society municipality coast erosion citizens"},
- {id:"ar",ini:"AR",name:"Arctic Field Station Residency",kind:"res",p:"sci",role:"Residency · three months · Svalbard region",why:"offers artists studio space next to permafrost and coastal monitoring.",kw:"residency arctic coast permafrost"}
+ {id:"al",ini:"AL",name:"Dr. Anna Lindqvist",kind:"person",p:"sci",role:{de:"Küstenforschung · Klimaservice-Zentrum, Hamburg",en:"Coastal research · Climate service centre, Hamburg"},why:{de:"forscht zu Küstenerosion und sucht einen künstlerischen Blick auf ihre Daten.",en:"works on coastal erosion and is looking for an artistic perspective on her data."},kw:"coast coastal erosion data sea küste küstenerosion daten meer"},
+ {id:"me",ini:"ME",name:"Mara Eliasson",kind:"person",p:"art",role:{de:"Immersive Installationen · Tallinn",en:"Immersive installations · Tallinn"},why:{de:"macht den Anstieg des Meeresspiegels räumlich erfahrbar und sucht wissenschaftliche Partner.",en:"makes sea-level rise tangible in space and is looking for scientific partners."},kw:"installation art sea level coast immersive installationskunst kunst meeresspiegel küste"},
+ {id:"jw",ini:"JW",name:"Jonas Weber",kind:"person",p:"tech",role:{de:"Datensonifikation · Berlin",en:"Data sonification · Berlin"},why:{de:"macht Sensordaten hörbar und braucht lange Messreihen von der Küste.",en:"turns sensor data into sound and needs long coastal time series to work with."},kw:"data sound sensor coast technology daten klang sensor küste technologie"},
+ {id:"kn",ini:"KN",name:"Kunsthalle Nord",kind:"inst",p:"art",role:{de:"Kunstmuseum · Kiel",en:"Art museum · Kiel"},why:{de:"plant eine Ausstellung zur Ostseeküste und sucht einen Partner aus der Klimaforschung.",en:"plans an exhibition on the Baltic coast and seeks a climate research partner."},kw:"museum exhibition coast baltic art institution ausstellung küste küstenerosion ostsee kunst"},
+ {id:"bo",ini:"BO",name:"Baltic Ocean Institute",kind:"inst",p:"sci",role:{de:"Forschungsinstitut · Rostock",en:"Research institute · Rostock"},why:{de:"hat 30 Jahre Messdaten zur Küstenlinie und sucht Künstler:innen, die sie öffentlich machen.",en:"has 30 years of shoreline measurements and seeks artists to make them public."},kw:"ocean data coast erosion research institution ozean daten küste küstenerosion forschung"},
+ {id:"cm",ini:"CM",name:{de:"Küstengemeinde Algarve",en:"Coastal municipality Algarve"},kind:"inst",p:"soc",role:{de:"Kommunalverwaltung · Portugal",en:"Local government · Portugal"},why:{de:"braucht partizipative Formate, um den geplanten Rückzug von der Küste mit den Menschen vor Ort zu besprechen.",en:"needs participatory formats to discuss managed retreat with residents."},kw:"society municipality coast erosion citizens gesellschaft gemeinde küste küstenerosion bürger"},
+ {id:"ar",ini:"AR",name:"Arctic Field Station Residency",kind:"res",p:"sci",role:{de:"Residenz · drei Monate · Svalbard",en:"Residency · three months · Svalbard region"},why:{de:"bietet Künstler:innen ein Atelier direkt neben Permafrost- und Küstenmessungen.",en:"offers artists studio space next to permafrost and coastal monitoring."},kw:"residency arctic coast permafrost residenz arktis küste küstenerosion"}
 ];
 const EVENTS=[
- {d:"12",m:"NOV",t:"Panel: Coasts in transition",w:"Hamburg · on site",type:"cal"},
- {d:"19",m:"NOV",t:"Webinar: Making data visible",w:"Online · live",type:"web"},
- {d:"03",m:"DEC",t:"Exhibition: Sea level",w:"Tallinn · on site",type:"cal"},
- {d:"DEC",m:"2026",t:"Platform Launch",w:"GERICS · Hamburg · date to be confirmed",type:"cal",hl:true}
+ {d:"12",m:"NOV",t:{de:"Panel: Küsten im Wandel",en:"Panel: Coasts in transition"},w:{de:"Hamburg · vor Ort",en:"Hamburg · on site"},type:"cal"},
+ {d:"19",m:"NOV",t:{de:"Webinar: Daten sichtbar machen",en:"Webinar: Making data visible"},w:{de:"Online · live",en:"Online · live"},type:"web"},
+ {d:"03",m:"DEC",t:{de:"Ausstellung: Meeresspiegel",en:"Exhibition: Sea level"},w:{de:"Tallinn · vor Ort",en:"Tallinn · on site"},type:"cal"},
+ {d:"DEC",m:"2026",t:{de:"Plattform-Launch",en:"Platform Launch"},w:{de:"GERICS · Hamburg · Datum folgt",en:"GERICS · Hamburg · date to be confirmed"},type:"cal",hl:true}
 ];
 const OPPS=[
- {k:"call",title:"Art-Science teams wanted on urban heat",org:"City climate office · Vienna",when:"Deadline 15 Jan 2027",what:"Funding for six-month pilots that make heat islands visible and liveable.",p:["art","sci","soc"]},
- {k:"res",title:"Arctic Field Station Residency",org:"Svalbard region",when:"3 months · from April 2027",what:"Studio, lodging and access to coastal monitoring data for one artist.",p:["art","sci"]},
- {k:"call",title:"Data stories from the North Sea",org:"Marine research foundation",when:"Deadline 28 Feb 2027",what:"Grants for teams that turn ocean datasets into public formats.",p:["sci","tech","art"]},
- {k:"res",title:"Glacier Lab Residency",org:"Alpine research station",when:"6 weeks · summer 2027",what:"Artists join a glaciology team on fieldwork and in the lab.",p:["art","sci"]}
+ {k:"call",title:{de:"Art-Science-Teams gesucht zum Thema städtische Hitze",en:"Art-Science teams wanted on urban heat"},org:{de:"Klimaamt der Stadt · Wien",en:"City climate office · Vienna"},when:{de:"Frist 15. Jan. 2027",en:"Deadline 15 Jan 2027"},what:{de:"Förderung für sechsmonatige Piloten, die Hitzeinseln sichtbar und lebenswerter machen.",en:"Funding for six-month pilots that make heat islands visible and liveable."},p:["art","sci","soc"]},
+ {k:"res",title:{de:"Arctic Field Station Residency",en:"Arctic Field Station Residency"},org:{de:"Svalbard",en:"Svalbard region"},when:{de:"3 Monate · ab April 2027",en:"3 months · from April 2027"},what:{de:"Atelier, Unterkunft und Zugang zu Küsten-Messdaten für eine Künstlerin oder einen Künstler.",en:"Studio, lodging and access to coastal monitoring data for one artist."},p:["art","sci"]},
+ {k:"call",title:{de:"Datengeschichten aus der Nordsee",en:"Data stories from the North Sea"},org:{de:"Stiftung für Meeresforschung",en:"Marine research foundation"},when:{de:"Frist 28. Feb. 2027",en:"Deadline 28 Feb 2027"},what:{de:"Förderung für Teams, die Ozeandaten in öffentliche Formate übersetzen.",en:"Grants for teams that turn ocean datasets into public formats."},p:["sci","tech","art"]},
+ {k:"res",title:{de:"Glacier Lab Residency",en:"Glacier Lab Residency"},org:{de:"Alpine Forschungsstation",en:"Alpine research station"},when:{de:"6 Wochen · Sommer 2027",en:"6 weeks · summer 2027"},what:{de:"Künstler:innen begleiten ein Glaziologie-Team im Feld und im Labor.",en:"Artists join a glaciology team on fieldwork and in the lab."},p:["art","sci"]}
 ];
+const L=v=>v&&typeof v==="object"&&!Array.isArray(v)?v[lang]:v;
 
 /* ---------- Views ---------- */
 const VIEWS=[
- {id:"home",nav:"Home",title:"Homepage",win:"Art-Science Europe · Homepage",
-  lede:"One search for expertise, topics, and opportunities. Explore the platform’s five key areas below.",
-  steps:[["Search","Start with a question or a topic, not with a category."],["Five areas","Matchmaking, Events, Open Calls & Projects, Artist Residencies, Exchange & Collaboration."]],
-  tryit:"Type a topic into the search, for example “coastal erosion”, and press Enter."},
- {id:"matchmaking",nav:"Matchmaking",title:"Matchmaking",win:"Art meets Science · Matchmaking",
-  lede:"From the right question to the right connection. Every match explains why it fits and what it could lead to.",
-  steps:[["Why it fits","Each result says in one sentence why this person or organisation is relevant."],["Not only people","Institutions and residencies appear next to individuals."],["Next step","Request a conversation, or open a shared space right away."]],
-  tryit:"Filter by Institutions, then open a shared space with one of the results."},
- {id:"profile",nav:"Profiles",title:"Profiles",win:"My profile · Skills",
-  lede:"Upload, confirm, done. Every profile shows what people do, seek, and offer.",
-  steps:[["Upload","Portfolio, CV, or website."],["AI suggests skills","You confirm or change them. Nothing is published without you."],["Four profile types","Person, Institution, Residency, Open Call."]],
-  tryit:"Click “Use example portfolio” and confirm the suggested skills."},
- {id:"events",nav:"Events",title:"Events",win:"Events & Webinars",
-  lede:"A curated European calendar of exhibitions, conferences, workshops, and festivals. Live webinars, with every recording available on demand.",
-  steps:[["Calendar","Curated by theme, across Europe."],["Webinars","Live, with recordings that stay available."]],
-  tryit:"Save a seat for the live webinar, then look at the Platform Launch."},
- {id:"opportunities",nav:"Open Calls & Residencies",title:"Open Calls & Residencies",win:"Opportunities",
-  lede:"Calls, funding, and residency programmes at the intersection of art and research. They are what turn a match into a joint project.",
-  steps:[["Open calls","Funding and cooperation offers with clear deadlines."],["Residencies","Places where artists work alongside research teams."]],
-  tryit:"Switch between Open calls and Residencies, then find partners for one call."},
- {id:"space",nav:"Project Space",title:"Project Space",win:"Project space · Water",
-  lede:"Where a match turns into a project. Teams come together to tackle a specific challenge.",
-  steps:[["The team","People from art, science, technology, and society, brought together through matchmaking."],["The workspace","Chat, file sharing, and an AI research assistant. Every result is reviewed by people."],["Shared AI","Each space comes with an AI quota, powered by European models on European servers (goal). Together, members decide what to use it for."]],
-  tryit:"Write a message to the team and see how the AI assistant answers."},
- {id:"outcomes",nav:"Shared outcomes",title:"Shared outcomes",win:"Shared outcomes",
-  lede:"Project outcomes are shared openly, so others facing similar challenges can adopt and build on them.",
-  steps:[["Published","What a project space develops becomes a shared outcome."],["Similar problem found","The platform points to other places with the same challenge."]],
-  tryit:"Adopt the filter stage for your own project."},
- {id:"membership",nav:"Membership",title:"Membership",win:"Membership",
-  lede:"Three ways to take part. Prices and benefits are open and will be set together in the founding workshop.",
-  steps:[["Individual","For people."],["Institution","For organisations, all staff included."],["Partner","For funders who shape the platform."]],
-  tryit:"Register your interest for the Platform Launch in December 2026."}
+ {id:"home",nav:{de:"Startseite",en:"Home"},title:{de:"Startseite",en:"Homepage"},win:{de:"Art-Science Europe · Startseite",en:"Art-Science Europe · Homepage"},
+  lede:{de:"Eine Suche für Expertise, Themen und Möglichkeiten. Darunter die fünf Bereiche der Plattform.",en:"One search for expertise, topics, and opportunities. Explore the platform’s five key areas below."},
+  steps:{de:[["Suche","Am Anfang steht eine Frage oder ein Thema, keine Kategorie."],["Fünf Bereiche","Matchmaking, Events, Ausschreibungen & Projekte, Residenzprogramme, Austausch & Zusammenarbeit."]],en:[["Search","Start with a question or a topic, not with a category."],["Five areas","Matchmaking, Events, Open Calls & Projects, Artist Residencies, Exchange & Collaboration."]]},
+  tryit:{de:"Geben Sie ein Thema in die Suche ein, zum Beispiel „Küstenerosion“, und drücken Sie Enter.",en:"Type a topic into the search, for example “coastal erosion”, and press Enter."}},
+ {id:"matchmaking",nav:{de:"Matchmaking",en:"Matchmaking"},title:{de:"Matchmaking",en:"Matchmaking"},win:{de:"Kunst trifft Wissenschaft · Matchmaking",en:"Art meets Science · Matchmaking"},
+  lede:{de:"Von der richtigen Frage zur richtigen Verbindung. Jeder Treffer erklärt, warum er passt und wozu er führen kann.",en:"From the right question to the right connection. Every match explains why it fits and what it could lead to."},
+  steps:{de:[["Warum es passt","Jeder Treffer sagt in einem Satz, warum diese Person oder Organisation relevant ist."],["Nicht nur Menschen","Institutionen und Residenzen erscheinen neben Einzelpersonen."],["Nächster Schritt","Ein Gespräch anfragen oder direkt einen gemeinsamen Raum öffnen."]],en:[["Why it fits","Each result says in one sentence why this person or organisation is relevant."],["Not only people","Institutions and residencies appear next to individuals."],["Next step","Request a conversation, or open a shared space right away."]]},
+  tryit:{de:"Filtern Sie nach Institutionen und öffnen Sie mit einem Treffer einen gemeinsamen Raum.",en:"Filter by Institutions, then open a shared space with one of the results."}},
+ {id:"profile",nav:{de:"Profile",en:"Profiles"},title:{de:"Profile",en:"Profiles"},win:{de:"Mein Profil · Fähigkeiten",en:"My profile · Skills"},
+  lede:{de:"Hochladen, bestätigen, fertig. Jedes Profil zeigt, was jemand macht, sucht und anbietet.",en:"Upload, confirm, done. Every profile shows what people do, seek, and offer."},
+  steps:{de:[["Hochladen","Portfolio, CV oder Website."],["KI schlägt Fähigkeiten vor","Sie bestätigen oder ändern sie. Nichts wird ohne Sie veröffentlicht."],["Vier Profiltypen","Person, Institution, Residenz, Ausschreibung."]],en:[["Upload","Portfolio, CV, or website."],["AI suggests skills","You confirm or change them. Nothing is published without you."],["Four profile types","Person, Institution, Residency, Open Call."]]},
+  tryit:{de:"Klicken Sie auf „Beispielportfolio verwenden“ und bestätigen Sie die vorgeschlagenen Fähigkeiten.",en:"Click “Use example portfolio” and confirm the suggested skills."}},
+ {id:"events",nav:{de:"Events",en:"Events"},title:{de:"Events",en:"Events"},win:{de:"Events & Webinare",en:"Events & Webinars"},
+  lede:{de:"Ein kuratierter europäischer Kalender mit Ausstellungen, Konferenzen, Workshops und Festivals. Live-Webinare, deren Aufzeichnungen jederzeit abrufbar bleiben.",en:"A curated European calendar of exhibitions, conferences, workshops, and festivals. Live webinars, with every recording available on demand."},
+  steps:{de:[["Kalender","Nach Themen kuratiert, in ganz Europa."],["Webinare","Live, mit Aufzeichnungen, die verfügbar bleiben."]],en:[["Calendar","Curated by theme, across Europe."],["Webinars","Live, with recordings that stay available."]]},
+  tryit:{de:"Reservieren Sie einen Platz für das Live-Webinar und schauen Sie sich den Plattform-Launch an.",en:"Save a seat for the live webinar, then look at the Platform Launch."}},
+ {id:"opportunities",nav:{de:"Ausschreibungen",en:"Open Calls"},title:{de:"Ausschreibungen & Residenzen",en:"Open Calls & Residencies"},win:{de:"Ausschreibungen & Residenzen",en:"Opportunities"},
+  lede:{de:"Ausschreibungen, Förderungen und Residenzprogramme an der Schnittstelle von Kunst und Forschung. Sie machen aus einem Match ein gemeinsames Projekt.",en:"Calls, funding, and residency programmes at the intersection of art and research. They are what turn a match into a joint project."},
+  steps:{de:[["Ausschreibungen","Förder- und Kooperationsangebote mit klaren Fristen."],["Residenzen","Orte, an denen Künstler:innen mit Forschungsteams arbeiten."]],en:[["Open calls","Funding and cooperation offers with clear deadlines."],["Residencies","Places where artists work alongside research teams."]]},
+  tryit:{de:"Wechseln Sie zwischen Ausschreibungen und Residenzen und suchen Sie Partner für eine Ausschreibung.",en:"Switch between Open calls and Residencies, then find partners for one call."}},
+ {id:"space",nav:{de:"Projektraum",en:"Project Space"},title:{de:"Projektraum",en:"Project Space"},win:{de:"Projektraum · Wasser",en:"Project space · Water"},
+  lede:{de:"Hier wird aus einem Match ein Projekt. Teams finden sich, um eine konkrete Herausforderung anzugehen.",en:"Where a match turns into a project. Teams come together to tackle a specific challenge."},
+  steps:{de:[["Das Team","Menschen aus Kunst, Wissenschaft, Technologie und Gesellschaft, zusammengebracht durch das Matchmaking."],["Der Arbeitsraum","Chat, Dateiablage und ein KI-Rechercheassistent. Jedes Ergebnis wird von Menschen geprüft."],["Geteilte KI","Jeder Raum bekommt ein KI-Kontingent mit europäischen Modellen auf europäischen Servern (Ziel). Die Mitglieder entscheiden gemeinsam, wofür sie es nutzen."]],en:[["The team","People from art, science, technology, and society, brought together through matchmaking."],["The workspace","Chat, file sharing, and an AI research assistant. Every result is reviewed by people."],["Shared AI","Each space comes with an AI quota, powered by European models on European servers (goal). Together, members decide what to use it for."]]},
+  tryit:{de:"Schreiben Sie dem Team eine Nachricht und sehen Sie, wie der KI-Assistent antwortet.",en:"Write a message to the team and see how the AI assistant answers."}},
+ {id:"outcomes",nav:{de:"Ergebnisse",en:"Outcomes"},title:{de:"Geteilte Ergebnisse",en:"Shared outcomes"},win:{de:"Geteilte Ergebnisse",en:"Shared outcomes"},
+  lede:{de:"Projektergebnisse werden offen geteilt, damit andere mit ähnlichen Herausforderungen sie übernehmen und weiterentwickeln können.",en:"Project outcomes are shared openly, so others facing similar challenges can adopt and build on them."},
+  steps:{de:[["Veröffentlicht","Was ein Projektraum entwickelt, wird zum geteilten Ergebnis."],["Ähnliches Problem gefunden","Die Plattform zeigt andere Orte mit derselben Herausforderung."]],en:[["Published","What a project space develops becomes a shared outcome."],["Similar problem found","The platform points to other places with the same challenge."]]},
+  tryit:{de:"Übernehmen Sie die Filterstufe für Ihr eigenes Projekt.",en:"Adopt the filter stage for your own project."}},
+ {id:"membership",nav:{de:"Mitgliedschaft",en:"Membership"},title:{de:"Mitgliedschaft",en:"Membership"},win:{de:"Mitgliedschaft",en:"Membership"},
+  lede:{de:"Drei Wege, dabei zu sein. Preise und Leistungen sind offen und werden gemeinsam im Gründungsworkshop festgelegt.",en:"Three ways to take part. Prices and benefits are open and will be set together in the founding workshop."},
+  steps:{de:[["Einzelmitglied","Für Menschen."],["Institution","Für Organisationen, alle Mitarbeitenden inklusive."],["Partner","Für Förderer, die die Plattform mitgestalten."]],en:[["Individual","For people."],["Institution","For organisations, all staff included."],["Partner","For funders who shape the platform."]]},
+  tryit:{de:"Melden Sie Ihr Interesse am Plattform-Launch im Dezember 2026 an.",en:"Register your interest for the Platform Launch in December 2026."}}
 ];
 const byId=Object.fromEntries(VIEWS.map(v=>[v.id,v]));
 
 /* ---------- State ---------- */
-const S={query:"Coastal erosion meets installation art",filter:"all",profTab:"person",bring:{art:true,sci:false,tech:true,soc:false},skills:["Architecture","Water treatment","Prototyping"],suggested:[],progress:80,evTab:"cal",seat:false,oppTab:"call",msgs:null,adopted:false,interest:false,requested:{}};
+const S={query:t("defaultQuery"),filter:"all",profTab:"person",bring:{art:true,sci:false,tech:true,soc:false},extraSkills:0,suggesting:false,progress:80,evTab:"cal",seat:false,oppTab:"call",msgs:null,adopted:false,interest:false,requested:{}};
 
 /* ---------- Helpers ---------- */
 const $=s=>document.querySelector(s);
 let toastT;
-function toast(msg){const t=$("#toast");t.querySelector("span").textContent=msg;t.classList.add("show");clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove("show"),3400);}
+function toast(msg){const el=$("#toast");el.querySelector("span").textContent=msg;el.classList.add("show");clearTimeout(toastT);toastT=setTimeout(()=>el.classList.remove("show"),3400);}
 function av(ini,color,size){const dark=color==="var(--art)";return `<span class="av" style="background:${color}${dark?";color:var(--ink)":""}${size?`;width:${size}px;height:${size}px`:""}">${esc(ini)}</span>`;}
-function tagFor(x){if(x.kind==="inst")return `<span class="tag t-inst">Institution</span>`;if(x.kind==="res")return `<span class="tag t-res">Residency</span>`;return `<span class="tag ${P[x.p].t}">${P[x.p].l}</span>`;}
+function tagFor(x){if(x.kind==="inst")return `<span class="tag t-inst">${t("tagInst")}</span>`;if(x.kind==="res")return `<span class="tag t-res">${t("tagRes")}</span>`;return `<span class="tag ${P[x.p].t}">${pl(x.p)}</span>`;}
 
 /* ---------- Renderers ---------- */
 const R={};
@@ -530,167 +683,152 @@ R.home=()=>`
  <div class="hero">
   ${heroArt()}
   <div class="copy">
-   <h2>Where art meets science.</h2>
-   <p class="claim">Connecting expertise. Enabling collaboration. Creating new possibilities.</p>
+   <h2>${t("heroH")}</h2>
+   <p class="claim">${t("claim")}</p>
   </div>
-  <form class="search" id="home-search" role="search">${ic("search")}<label class="sr" for="q-home" hidden>Search</label><input id="q-home" placeholder="Find expertise, projects or opportunities …" autocomplete="off"><button class="btn btn-green" type="submit">Search</button></form>
+  <form class="search" id="home-search" role="search">${ic("search")}<input id="q-home" placeholder="${esc(t("searchPh"))}" aria-label="${esc(t("searchAria"))}" autocomplete="off"><button class="btn btn-green" type="submit">${t("search")}</button></form>
  </div>
  <div class="areas" role="list">
-  ${[["Art meets Science","Curated profiles of artists, scientists, and institutions.","matchmaking","var(--art)"],["Events","A European calendar of exhibitions, conferences, and webinars.","events","var(--sci)"],["Open Calls & Projects","Calls, funding, and cooperation offers.","opportunities","var(--tech)"],["Artist Residencies","Residency programmes where art and research meet.","opportunities:res","var(--soc)"],["Exchange & Collaboration","First project ideas, partner search, and shared spaces.","space","var(--green)"]].map(a=>`
-  <button class="area" role="listitem" data-go="${a[2]}"><span class="dot" style="background:${a[3]}"></span><h3>${a[0]}</h3><p>${a[1]}</p><span class="go">Open ${ic("arrow")}</span></button>`).join("")}
+  ${t("areas").map((a,i)=>`<button class="area" role="listitem" data-go="${["matchmaking","events","opportunities","opportunities:res","space"][i]}"><span class="dot" style="background:${["var(--art)","var(--sci)","var(--tech)","var(--soc)","var(--green)"][i]}"></span><h3>${a[0]}</h3><p>${a[1]}</p><span class="go">${t("open")} ${ic("arrow")}</span></button>`).join("")}
  </div>
- <div class="hsec"><h2>How it works</h2></div>
+ <div class="hsec"><h2>${t("howH")}</h2></div>
  <div class="flow">
-  ${[["globe","Challenge","A starting point for collaboration"],["search","Discover","People, knowledge, and opportunities"],["users","Connect","Perspectives brought together"],["bulb","Develop","Ideas and project concepts"],["tool","Realize","Funding, pilots, and partnerships"],["star","Impact","Projects that drive transformation"]].map(s=>`<div class="fstep"><span class="ring">${ic(s[0])}</span><b>${s[1]}</b><span>${s[2]}</span></div>`).join("")}
+  ${t("flow").map((s,i)=>`<div class="fstep"><span class="ring">${ic(["globe","search","users","bulb","tool","star"][i])}</span><b>${s[0]}</b><span>${s[1]}</span></div>`).join("")}
  </div>
  <div class="launch">
-  <div class="datebox"><b>DEC</b><span>2026</span></div>
-  <div><h3>Platform Launch</h3><p class="soft">Climate Service Center Germany (GERICS), Hamburg · with an interactive media installation</p></div>
-  <button class="btn btn-dark" data-go="membership">Register interest ${ic("arrow")}</button>
+  <div class="datebox"><b>${t("months").DEC}</b><span>2026</span></div>
+  <div><h3>${t("launchH")}</h3><p class="soft">${t("launchHome")}</p></div>
+  <button class="btn btn-dark" data-go="membership">${t("register")} ${ic("arrow")}</button>
  </div>`;
 
 R.matchmaking=()=>{
  const q=S.query.toLowerCase().split(/\s+/).filter(w=>w.length>2);
  let list=PEOPLE.filter(x=>S.filter==="all"||(S.filter==="inst"&&x.kind==="inst")||(S.filter==="res"&&x.kind==="res")||x.p===S.filter);
- list=list.map(x=>({x,score:q.reduce((n,w)=>n+((x.kw+" "+x.role+" "+x.why).toLowerCase().includes(w)?1:0),0)})).filter(o=>!q.length||o.score>0).sort((a,b)=>b.score-a.score);
- const chips=[["all","All"],["art","Art"],["sci","Science"],["tech","Technology"],["soc","Society"],["inst","Institutions"],["res","Residencies"]];
+ list=list.map(x=>({x,score:q.reduce((n,w)=>n+((x.kw+" "+L(x.role)+" "+L(x.why)).toLowerCase().includes(w)?1:0),0)})).filter(o=>!q.length||o.score>0).sort((a,b)=>b.score-a.score);
  return `
- <form class="search" id="mm-search" role="search">${ic("search")}<input id="q-mm" value="${esc(S.query)}" aria-label="Search" autocomplete="off"><button class="btn btn-green" type="submit">Search</button></form>
- <div class="chips" role="group" aria-label="Filter">${chips.map(c=>`<button class="chip" data-filter="${c[0]}" aria-pressed="${S.filter===c[0]}">${c[1]}</button>`).join("")}</div>
- <p class="muted" style="font-size:13.5px">${list.length} ${list.length===1?"match":"matches"} for “${esc(S.query)}”</p>
+ <form class="search" id="mm-search" role="search">${ic("search")}<input id="q-mm" value="${esc(S.query)}" aria-label="${esc(t("searchAria"))}" autocomplete="off"><button class="btn btn-green" type="submit">${t("search")}</button></form>
+ <div class="chips" role="group" aria-label="${t("filterAria")}">${t("chips").map(c=>`<button class="chip" data-filter="${c[0]}" aria-pressed="${S.filter===c[0]}">${c[1]}</button>`).join("")}</div>
+ <p class="muted" style="font-size:13.5px">${esc(t("matches")(list.length,S.query))}</p>
  <div class="results">${list.length?list.map(({x})=>`
   <article class="result" data-comment-target>
    ${av(x.ini,P[x.p].c)}
-   <div class="who"><div class="name"><b>${esc(x.name)}</b>${tagFor(x)}</div><span class="soft" style="font-size:13.5px">${esc(x.role)}</span><p class="why"><strong>Why it fits:</strong> ${esc(x.why)}</p></div>
+   <div class="who"><div class="name"><b>${esc(L(x.name))}</b>${tagFor(x)}</div><span class="soft" style="font-size:13.5px">${esc(L(x.role))}</span><p class="why"><strong>${t("why")}</strong> ${esc(L(x.why))}</p></div>
    <div class="acts">
-    <button class="btn ${S.requested[x.id]?"btn-ghost":"btn-dark"}" data-request="${x.id}" ${S.requested[x.id]?"disabled":""}>${S.requested[x.id]?ic("check")+" Requested":"Request a conversation"}</button>
-    <button class="btn btn-line" data-go="space">Open a shared space</button>
+    <button class="btn ${S.requested[x.id]?"btn-ghost":"btn-dark"}" data-request="${x.id}" ${S.requested[x.id]?"disabled":""}>${S.requested[x.id]?ic("check")+" "+t("requested"):t("request")}</button>
+    <button class="btn btn-line" data-go="space">${t("openSpace")}</button>
    </div>
-  </article>`).join(""):`<div class="empty">No matches for this search in the example data. Try “coast”, “data” or “residency”.</div>`}</div>`;
+  </article>`).join(""):`<div class="empty">${esc(t("empty"))}</div>`}</div>`;
 };
 
 R.profile=()=>{
- const tabs=[["person","Person"],["inst","Institution"],["res","Residency"],["call","Open Call"]];
  let body="";
  if(S.profTab==="person"){
+  const base=t("baseSkills"),sug=t("suggestSkills");
+  const confirmed=base.concat(sug.slice(0,S.extraSkills));
   body=`
-  <div class="drop">${I.cloud?`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${I.cloud}</svg>`:""}<div class="t"><b>Add portfolio, CV, or website</b><span class="soft" style="font-size:14px">AI suggests skills. You confirm or change them.</span></div><button class="btn btn-green" id="suggest" ${S.suggested.length||S.skills.length>3?"disabled":""}>${ic("sparkle")} Use example portfolio</button></div>
-  <div class="prof-head">${av("JK","var(--tech)")}<div style="display:flex;flex-direction:column;gap:6px"><h3 style="font-size:32px">Jana Keller</h3><span class="soft">Architect · Tenerife</span><div class="prog"><span class="bar"><i style="width:${S.progress}%"></i></span>${S.progress} % complete</div></div></div>
-  <div style="display:flex;flex-direction:column;gap:8px"><span class="label">I bring</span><div class="chips">${Object.keys(P).map(k=>`<button class="chip persp ${k}" data-bring="${k}" aria-pressed="${S.bring[k]}">${P[k].l}</button>`).join("")}</div></div>
-  <div style="display:flex;flex-direction:column;gap:8px"><span class="label">Skills</span><div class="chips">${S.skills.map(s=>`<span class="chip skill">${esc(s)}</span>`).join("")}${S.suggested.map(s=>`<span class="chip skill suggested">${ic("sparkle")} ${esc(s)}</span>`).join("")}</div>
-   ${S.suggested.length?`<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><span class="soft" style="font-size:13.5px">Suggested from the example portfolio.</span><button class="btn btn-dark" id="confirm-skills">${ic("check")} Confirm skills</button><button class="btn btn-ghost" id="discard-skills">Discard</button></div>`:""}</div>
-  <div class="two"><div class="field"><span class="label">I am looking for</span><span>Scientific partners for coastal protection</span></div><div class="field"><span class="label">I offer</span><span>Prototyping, spatial design, workshop access</span></div></div>
-  <p class="example">“I am looking for” and “I offer” drive the matches in Matchmaking.</p>`;
+  <div class="drop"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${I.cloud}</svg><div class="t"><b>${t("dropH")}</b><span class="soft" style="font-size:14px">${t("dropP")}</span></div><button class="btn btn-green" id="suggest" ${S.suggesting||S.extraSkills?"disabled":""}>${ic("sparkle")} ${t("useExample")}</button></div>
+  <div class="prof-head">${av("JK","var(--tech)")}<div style="display:flex;flex-direction:column;gap:6px"><h3 style="font-size:32px">Jana Keller</h3><span class="soft">${t("janaRole")}</span><div class="prog"><span class="bar"><i style="width:${S.progress}%"></i></span>${S.progress} ${t("complete")}</div></div></div>
+  <div style="display:flex;flex-direction:column;gap:8px"><span class="label">${t("bring")}</span><div class="chips">${Object.keys(P).map(k=>`<button class="chip persp ${k}" data-bring="${k}" aria-pressed="${S.bring[k]}">${pl(k)}</button>`).join("")}</div></div>
+  <div style="display:flex;flex-direction:column;gap:8px"><span class="label">${t("skills")}</span><div class="chips">${confirmed.map(s=>`<span class="chip skill">${esc(s)}</span>`).join("")}${S.suggesting?sug.map(s=>`<span class="chip skill suggested">${ic("sparkle")} ${esc(s)}</span>`).join(""):""}</div>
+   ${S.suggesting?`<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><span class="soft" style="font-size:13.5px">${t("suggestedFrom")}</span><button class="btn btn-dark" id="confirm-skills">${ic("check")} ${t("confirmSkills")}</button><button class="btn btn-ghost" id="discard-skills">${t("discard")}</button></div>`:""}</div>
+  <div class="two"><div class="field"><span class="label">${t("seek")}</span><span>${t("seekV")}</span></div><div class="field"><span class="label">${t("offer")}</span><span>${t("offerV")}</span></div></div>
+  <p class="example">${t("seekNote")}</p>`;
  } else {
-  const ex={inst:[["var(--art)","Art museum seeks a climate research partner","Kunsthalle Nord · Kiel"],["var(--sci)","Research institute seeks artists for its ocean data","Baltic Ocean Institute · Rostock"]],
-   res:[["var(--tech)","Polar station offers a three-month art residency","Arctic Field Station · Svalbard region"],["var(--tech)","Glaciology lab hosts artists for six weeks","Alpine research station"]],
-   call:[["var(--soc)","Art-Science teams wanted on urban heat","City climate office · Vienna"],["var(--soc)","Data stories from the North Sea","Marine research foundation"]]}[S.profTab];
-  const intro={inst:"Institutions describe what they look for in the other discipline. Art institutions find research partners, and research institutes find artists.",res:"Residency programmes list place, duration, and what residents get access to.",call:"Open calls list funding, deadline, and the team they are looking for."}[S.profTab];
-  body=`<p class="soft" style="max-width:62ch">${intro}</p><div class="kinds">${ex.map(e=>`<div class="kind" data-comment-target><span class="dot" style="background:${e[0]}"></span><div><b>${e[1]}</b><br><span class="soft" style="font-size:13px">${e[2]}</span></div></div>`).join("")}</div>
-  <button class="btn btn-line" style="align-self:flex-start" data-go="${S.profTab==="inst"?"matchmaking:inst":"opportunities:"+S.profTab}">See them on the platform ${ic("arrow")}</button>`;
+  const ex=t("kindEx")[S.profTab];
+  body=`<p class="soft" style="max-width:62ch">${t("kindIntro")[S.profTab]}</p><div class="kinds">${ex.map(e=>`<div class="kind" data-comment-target><span class="dot" style="background:${e[0]}"></span><div><b>${e[1]}</b><br><span class="soft" style="font-size:13px">${e[2]}</span></div></div>`).join("")}</div>
+  <button class="btn btn-line" style="align-self:flex-start" data-go="${S.profTab==="inst"?"matchmaking:inst":"opportunities:"+S.profTab}">${t("seeOnPlatform")} ${ic("arrow")}</button>`;
  }
- return `<div class="tabs" role="tablist">${tabs.map(t=>`<button role="tab" data-ptab="${t[0]}" aria-selected="${S.profTab===t[0]}">${t[1]}</button>`).join("")}</div>${body}`;
+ return `<div class="tabs" role="tablist">${t("ptabs").map(x=>`<button role="tab" data-ptab="${x[0]}" aria-selected="${S.profTab===x[0]}">${x[1]}</button>`).join("")}</div>${body}`;
 };
 
 R.events=()=>{
- const tabs=[["cal","Calendar"],["web","Webinars"],["rec","Recordings"]];
  const list=S.evTab==="rec"?[]:EVENTS.filter(e=>S.evTab==="cal"||e.type==="web");
+ const grads=["linear-gradient(135deg,#7CC09A,#2F7A57)","linear-gradient(135deg,#D9B26A,#2F7A57)","linear-gradient(135deg,#7FA7CC,#2F5D8A)","linear-gradient(135deg,#D59A84,#A5533F)"];
  const left=S.evTab==="rec"
-  ?`<div class="rec">${[["Coastal protection","linear-gradient(135deg,#7CC09A,#2F7A57)"],["Climate and art","linear-gradient(135deg,#D9B26A,#2F7A57)"],["Data as material","linear-gradient(135deg,#7FA7CC,#2F5D8A)"],["Cities in heat","linear-gradient(135deg,#D59A84,#A5533F)"]].map(r=>`<div style="background:${r[1]}">${ic("play")}&nbsp;${r[0]}</div>`).join("")}</div>`
-  :`<div class="evlist">${list.map(e=>`<div class="ev ${e.hl?"hl":""}" data-comment-target><div class="datebox"><b>${e.d}</b><span>${e.m}</span></div><div><b>${esc(e.t)}</b><small>${esc(e.w)}</small></div>${e.hl?`<button class="btn btn-ghost" data-go="membership">Details</button>`:""}</div>`).join("")}</div>`;
- return `<div class="tabs" role="tablist">${tabs.map(t=>`<button role="tab" data-etab="${t[0]}" aria-selected="${S.evTab===t[0]}">${t[1]}</button>`).join("")}</div>
+  ?`<div class="rec">${t("recs").map((r,i)=>`<div style="background:${grads[i]}">${ic("play")}&nbsp;${r}</div>`).join("")}</div>`
+  :`<div class="evlist">${list.map(e=>`<div class="ev ${e.hl?"hl":""}" data-comment-target><div class="datebox"><b>${e.hl?t("months").DEC:e.d}</b><span>${e.hl?e.m:t("months")[e.m]}</span></div><div><b>${esc(L(e.t))}</b><small>${esc(L(e.w))}</small></div>${e.hl?`<button class="btn btn-ghost" data-go="membership">${t("details")}</button>`:""}</div>`).join("")}</div>`;
+ return `<div class="tabs" role="tablist">${t("etabs").map(x=>`<button role="tab" data-etab="${x[0]}" aria-selected="${S.evTab===x[0]}">${x[1]}</button>`).join("")}</div>
  <div class="ev-grid">${left}
   <div style="display:flex;flex-direction:column;gap:14px">
-   <div class="live"><div class="thumb"><span class="badge">Live in 2 days</span><span class="play">${ic("play")}</span></div>
-    <div class="body"><h3>Water, data, sculpture</h3><p>Research meets installation. Speakers from four countries.</p>
-     <button class="btn ${S.seat?"btn-ghost":"btn-green"}" id="seat" style="align-self:flex-start;${S.seat?"color:var(--leaf)":""}">${S.seat?ic("check")+" Seat saved":"Save your seat"}</button></div></div>
-   <p class="soft" style="font-size:14px">Every webinar is recorded. Missed one? Find it under Recordings.</p>
+   <div class="live"><div class="thumb"><span class="badge">${t("liveBadge")}</span><span class="play">${ic("play")}</span></div>
+    <div class="body"><h3>${t("liveH")}</h3><p>${t("liveP")}</p>
+     <button class="btn ${S.seat?"btn-ghost":"btn-green"}" id="seat" style="align-self:flex-start;${S.seat?"color:var(--leaf)":""}">${S.seat?ic("check")+" "+t("seatDone"):t("seat")}</button></div></div>
+   <p class="soft" style="font-size:14px">${t("recNote")}</p>
   </div></div>`;
 };
 
 R.opportunities=()=>{
  const list=OPPS.filter(o=>o.k===S.oppTab);
- return `<div class="tabs" role="tablist"><button role="tab" data-otab="call" aria-selected="${S.oppTab==="call"}">Open calls</button><button role="tab" data-otab="res" aria-selected="${S.oppTab==="res"}">Residencies</button></div>
+ return `<div class="tabs" role="tablist">${t("otabs").map(x=>`<button role="tab" data-otab="${x[0]}" aria-selected="${S.oppTab===x[0]}">${x[1]}</button>`).join("")}</div>
  <div class="opps">${list.map(o=>`<article class="opp" data-comment-target>
-  <span>${o.k==="call"?`<span class="tag t-soc">Open Call</span>`:`<span class="tag t-res">Residency</span>`}</span>
-  <h3>${esc(o.title)}</h3>
-  <div class="meta"><span>${ic("pin")}${esc(o.org)}</span><span>${ic(o.k==="call"?"clock":"cal")}${esc(o.when)}</span></div>
-  <p class="soft" style="font-size:14px">${esc(o.what)}</p>
-  <div class="chips">${o.p.map(k=>`<span class="tag ${P[k].t}">${P[k].l}</span>`).join("")}</div>
-  <div class="row"><span class="example">Looking for: ${o.p.map(k=>P[k].l.toLowerCase()).join(", ")}</span><button class="btn btn-dark" data-go="matchmaking">Find partners ${ic("arrow")}</button></div>
+  <span>${o.k==="call"?`<span class="tag t-soc">${t("tagCall")}</span>`:`<span class="tag t-res">${t("tagRes")}</span>`}</span>
+  <h3>${esc(L(o.title))}</h3>
+  <div class="meta"><span>${ic("pin")}${esc(L(o.org))}</span><span>${ic(o.k==="call"?"clock":"cal")}${esc(L(o.when))}</span></div>
+  <p class="soft" style="font-size:14px">${esc(L(o.what))}</p>
+  <div class="chips">${o.p.map(k=>`<span class="tag ${P[k].t}">${pl(k)}</span>`).join("")}</div>
+  <div class="row"><span class="example">${t("lookingFor")} ${o.p.map(k=>pl(k)).join(", ")}</span><button class="btn btn-dark" data-go="matchmaking">${t("findPartners")} ${ic("arrow")}</button></div>
  </article>`).join("")}</div>`;
 };
 
-function seedMsgs(){return [
- {who:"SR",c:"var(--art)",t:"The filter sketch is ready. Who has data on materials?"},
- {ai:true,t:"14 studies analysed. Two materials fit your sketch."},
- {doc:true}
-];}
 R.space=()=>{
- if(!S.msgs)S.msgs=seedMsgs();
- const team=[["JK","Jana Keller","Architecture","var(--tech)"],["MS","Dr. M. Santos","Hydrology","var(--sci)"],["LO","L. Okafor","Mechatronics","var(--tech)"],["SR","S. Ruiz","Installation art","var(--art)"]];
+ if(!S.msgs)S.msgs=[{seed:"msg1"},{seed:"ai1",ai:true},{doc:true}];
+ const roles=t("teamRoles");
+ const team=[["JK","Jana Keller","var(--tech)"],["MS","Dr. M. Santos","var(--sci)"],["LO","L. Okafor","var(--tech)"],["SR","S. Ruiz","var(--art)"]];
+ const text=m=>m.seed?t(m.seed):m.reply?t("aiReply"):m.t;
  return `<div class="space">
-  <div class="col side"><div class="colhead"><i>1</i>The team</div>
-   <h3 style="font-size:26px">Polluted water in the Canary Islands</h3>
-   ${team.map(m=>`<div class="member">${av(m[0],m[3])}<div><b>${m[1]}</b><small>${m[2]}</small></div></div>`).join("")}
-   <button class="btn btn-ghost" style="align-self:flex-start" data-go="matchmaking">${ic("plus")} Invite a match</button>
+  <div class="col side"><div class="colhead"><i>1</i>${t("team")}</div>
+   <h3 style="font-size:26px">${t("spaceTitle")}</h3>
+   ${team.map((m,i)=>`<div class="member">${av(m[0],m[2])}<div><b>${m[1]}</b><small>${roles[i]}</small></div></div>`).join("")}
+   <button class="btn btn-ghost" style="align-self:flex-start" data-go="matchmaking">${ic("plus")} ${t("invite")}</button>
   </div>
-  <div class="col"><div class="colhead"><i>2</i>The workspace</div>
-   <div class="chat" id="chat">${S.msgs.map(m=>m.doc?`<div class="doc">${ic("book")}<div><b style="font-size:13.5px">Filter materials compared</b><div class="check">${ic("check")} checked by M. Santos</div></div></div>`
-    :m.ai?`<div class="msg"><span class="av" style="background:var(--leaf);color:var(--ink);width:32px;height:32px">${ic("bulb")}</span><div class="bubble ai"><b>AI assistant</b>${esc(m.t)}</div></div>`
-    :m.mine?`<div class="msg mine">${av("JK","var(--tech)",32)}<div class="bubble me">${esc(m.t)}</div></div>`
-    :`<div class="msg">${av(m.who,m.c,32)}<div class="bubble">${esc(m.t)}</div></div>`).join("")}</div>
-   <form class="composer" id="composer"><input id="msg" placeholder="Message the team …" maxlength="300" autocomplete="off" aria-label="Message the team"><button type="submit" aria-label="Send">${ic("send")}</button></form>
+  <div class="col"><div class="colhead"><i>2</i>${t("workspace")}</div>
+   <div class="chat" id="chat">${S.msgs.map(m=>m.doc?`<div class="doc">${ic("book")}<div><b style="font-size:13.5px">${t("docTitle")}</b><div class="check">${ic("check")} ${t("docChecked")}</div></div></div>`
+    :m.ai?`<div class="msg"><span class="av" style="background:var(--leaf);color:var(--ink);width:32px;height:32px">${ic("bulb")}</span><div class="bubble ai"><b>${t("aiName")}</b>${esc(text(m))}</div></div>`
+    :m.mine?`<div class="msg mine">${av("JK","var(--tech)",32)}<div class="bubble me">${esc(text(m))}</div></div>`
+    :`<div class="msg">${av("SR","var(--art)",32)}<div class="bubble">${esc(text(m))}</div></div>`).join("")}</div>
+   <form class="composer" id="composer"><input id="msg" placeholder="${esc(t("msgPh"))}" maxlength="300" autocomplete="off" aria-label="${esc(t("msgAria"))}"><button type="submit" aria-label="${esc(t("send"))}">${ic("send")}</button></form>
   </div>
-  <div class="col side"><div class="colhead"><i>3</i>Shared AI</div>
-   <div class="quota"><b id="quota">62&nbsp;%</b><span class="soft" style="font-size:13px">quota left this month</span></div>
-   <div class="meter"><i id="meter"></i></div>
-   <div class="feat">${ic("lock")}<div><b>Servers in the EU <span class="goal">Goal</span></b><span class="soft">Data stays in Europe</span></div></div>
-   <div class="feat">${ic("chat")}<div><b>European model <span class="goal">Goal</span></b><span class="soft">For everyone in the space</span></div></div>
-   <div class="feat">${ic("db")}<div><b>Own model: Water <span class="goal">Goal</span></b><span class="soft">Trained together</span></div></div>
-   <button class="btn btn-dark" style="margin-top:auto" data-share>Share outcome</button>
+  <div class="col side"><div class="colhead"><i>3</i>${t("sharedAI")}</div>
+   <div class="quota"><b id="quota">${S.quota||62}&nbsp;%</b><span class="soft" style="font-size:13px">${t("quotaLeft")}</span></div>
+   <div class="meter"><i id="meter" style="width:${S.quota||62}%"></i></div>
+   ${t("feat").map((f,i)=>`<div class="feat">${ic(["lock","chat","db"][i])}<div><b>${f[0]} <span class="goal">${t("goal")}</span></b><span class="soft">${f[1]}</span></div></div>`).join("")}
+   <button class="btn btn-dark" style="margin-top:auto" data-share>${t("shareOutcome")}</button>
   </div></div>`;
 };
 
 R.outcomes=()=>`
- <form class="search" id="oc-search" role="search">${ic("search")}<input value="Water, coast, heat …" aria-label="Search outcomes" autocomplete="off"><button class="btn btn-green" type="submit">Search</button></form>
+ <form class="search" id="oc-search" role="search">${ic("search")}<input value="${esc(t("ocSearch"))}" aria-label="${esc(t("ocSearchAria"))}" autocomplete="off"><button class="btn btn-green" type="submit">${t("search")}</button></form>
  <article class="outcome" data-comment-target>
-  <div class="vis"><svg width="150" height="200" viewBox="0 0 300 400" role="img" aria-label="Murky water passes through three filter stages and comes out clear"><path d="M150 26C150 26 118 66 118 88a32 32 0 0 0 64 0C182 66 150 26 150 26Z" fill="#8C7A5B"/><rect x="64" y="146" width="172" height="44" rx="12" fill="#B8863B"/><rect x="64" y="202" width="172" height="44" rx="12" fill="#2F5D8A"/><rect x="64" y="258" width="172" height="44" rx="12" fill="#3E8A78"/><path d="M150 124v16M150 192v8M150 248v8M150 304v16" stroke="#2F7A57" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M150 330c0 0-26 32-26 46a26 26 0 0 0 52 0c0-14-26-46-26-46Z" fill="#BFE3F2" stroke="#2F5D8A" stroke-width="2"/></svg></div>
+  <div class="vis"><svg width="150" height="200" viewBox="0 0 300 400" role="img" aria-label="${esc(t("ocAlt"))}"><path d="M150 26C150 26 118 66 118 88a32 32 0 0 0 64 0C182 66 150 26 150 26Z" fill="#8C7A5B"/><rect x="64" y="146" width="172" height="44" rx="12" fill="#B8863B"/><rect x="64" y="202" width="172" height="44" rx="12" fill="#2F5D8A"/><rect x="64" y="258" width="172" height="44" rx="12" fill="#3E8A78"/><path d="M150 124v16M150 192v8M150 248v8M150 304v16" stroke="#2F7A57" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M150 330c0 0-26 32-26 46a26 26 0 0 0 52 0c0-14-26-46-26-46Z" fill="#BFE3F2" stroke="#2F5D8A" stroke-width="2"/></svg></div>
   <div class="body">
-   <span><span class="tag t-tech">Published · Project space Water</span></span>
-   <h3>Mobile filter stage for polluted water</h3>
-   <p class="soft">Three stages, local materials. Developed by an architect, a hydrologist, a mechatronics engineer, and an installation artist.</p>
-   <div class="similar">${ic("link")}<span><b>Similar problem found:</b> riverbed in Bremen-Nord</span></div>
+   <span><span class="tag t-tech">${t("published")}</span></span>
+   <h3>${t("ocTitle")}</h3>
+   <p class="soft">${t("ocP")}</p>
+   <div class="similar">${ic("link")}<span>${t("similar")}</span></div>
    <div style="display:flex;gap:10px;flex-wrap:wrap">
-    <button class="btn ${S.adopted?"btn-ghost":"btn-dark"}" id="adopt" ${S.adopted?"disabled":""}>${S.adopted?ic("check")+" Added to your project":"Adopt for my project"}</button>
-    <button class="btn btn-line" data-go="space">See how it was made</button>
+    <button class="btn ${S.adopted?"btn-ghost":"btn-dark"}" id="adopt" ${S.adopted?"disabled":""}>${S.adopted?ic("check")+" "+t("adopted"):t("adopt")}</button>
+    <button class="btn btn-line" data-go="space">${t("howMade")}</button>
    </div>
   </div>
  </article>
  <div class="minis">
-  <div class="mini" data-comment-target><b>Shade architecture against urban heat</b><span class="tag t-sci">City · Climate</span></div>
-  <div class="mini" data-comment-target><b>Coastal protection with art reefs</b><span class="tag t-art">Coast · Art</span></div>
+  <div class="mini" data-comment-target><b>${t("minis")[0][0]}</b><span class="tag t-sci">${t("minis")[0][1]}</span></div>
+  <div class="mini" data-comment-target><b>${t("minis")[1][0]}</b><span class="tag t-art">${t("minis")[1][1]}</span></div>
  </div>`;
 
 R.membership=()=>`
  <div class="tiers">
-  ${[["For people","Individual","Price open","var(--art)",["Profile with skills, needs, and offers","Matchmaking, events, and recordings","Personal AI quota (goal)"],"Become a member"],
-     ["For organisations","Institution","Price open","var(--sci)",["All staff included","Find partner institutions across disciplines","A say in how the platform evolves"],"Become a member"],
-     ["For funders","Partner","Price open, in discussion","var(--tech)",["Shape the platform and its rules","Project spaces and shared AI infrastructure","Help select pilot projects"],"Get in touch"]].map(t=>`
-  <div class="tier" style="--c:${t[3]}" data-comment-target><span class="for">${t[0]}</span><h3>${t[1]}</h3><span class="price">${t[2]}</span><ul>${t[4].map(b=>`<li>${b}</li>`).join("")}</ul><button class="btn btn-line" data-member="${t[1]}">${t[5]}</button></div>`).join("")}
+  ${t("tiers").map((x,i)=>`
+  <div class="tier" style="--c:${["var(--art)","var(--sci)","var(--tech)"][i]}" data-comment-target><span class="for">${x[0]}</span><h3>${x[1]}</h3><span class="price">${x[2]}</span><ul>${x[3].map(b=>`<li>${b}</li>`).join("")}</ul><button class="btn btn-line" data-member="${i}">${x[4]}</button></div>`).join("")}
  </div>
- <p class="example">Example model, inspired by the Society for Artistic Research · prices and benefits open</p>
+ <p class="example">${t("tierNote")}</p>
  <div class="launch" data-comment-target>
-  <div class="datebox"><b>DEC</b><span>2026</span></div>
-  <div><h3>Platform Launch</h3><p class="soft">GERICS, Hamburg · for potential members from art, science, technology, society, and funding · exact date to be confirmed</p></div>
-  <button class="btn ${S.interest?"btn-ghost":"btn-dark"}" id="interest" ${S.interest?"disabled":""}>${S.interest?ic("check")+" Interest noted":"Register interest"}</button>
+  <div class="datebox"><b>${t("months").DEC}</b><span>2026</span></div>
+  <div><h3>${t("launchH")}</h3><p class="soft">${t("launchMember")}</p></div>
+  <button class="btn ${S.interest?"btn-ghost":"btn-dark"}" id="interest" ${S.interest?"disabled":""}>${S.interest?ic("check")+" "+t("registered"):t("register")}</button>
  </div>
- ${S.interest?`<p class="soft" style="font-size:14px">In this prototype nothing is sent. At launch, registration opens here.</p>`:""}
- <div class="reasons">
-  <div><h3>Raise your profile</h3><p>Connect with Europe’s art, science, and technology communities.</p></div>
-  <div><h3>Co-create</h3><p>Help shape the platform and its community from day one.</p></div>
-  <div><h3>Expand your network</h3><p>Discover new partners, skills, and project opportunities across Europe.</p></div>
- </div>`;
+ ${S.interest?`<p class="soft" style="font-size:14px">${t("interestNote")}</p>`:""}
+ <div class="reasons">${t("reasons").map(r=>`<div><h3>${r[0]}</h3><p>${r[1]}</p></div>`).join("")}</div>`;
 
 function heroArt(){return `<svg class="art" viewBox="900 60 1020 1000" aria-hidden="true">
  <defs><radialGradient id="g" cx=".36" cy=".3" r=".8"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset=".5" stop-color="#EAF6EF" stop-opacity=".45"/><stop offset="1" stop-color="#6FB38E" stop-opacity=".38"/></radialGradient>
@@ -709,17 +847,38 @@ function heroArt(){return `<svg class="art" viewBox="900 60 1020 1000" aria-hidd
 function renderGuide(v){
  const i=VIEWS.indexOf(v),prev=VIEWS[i-1],next=VIEWS[i+1];
  $("#guide").innerHTML=`
-  <h1>${esc(v.title)}</h1>
-  <p class="lede">${esc(v.lede)}</p>
-  <div class="steps">${v.steps.map((s,n)=>`<div class="step"><i>${n+1}</i><div><b>${esc(s[0])}</b><span>${esc(s[1])}</span></div></div>`).join("")}</div>
-  <div class="try">${ic("eye")}<span><b>Try it:</b> ${esc(v.tryit)}</span></div>
+  <h1${L(v.title).length>18?' style="font-size:clamp(34px,3.2vw,44px)"':""}>${esc(L(v.title))}</h1>
+  <p class="lede">${esc(L(v.lede))}</p>
+  <div class="steps">${L(v.steps).map((s,n)=>`<div class="step"><i>${n+1}</i><div><b>${esc(s[0])}</b><span>${esc(s[1])}</span></div></div>`).join("")}</div>
+  <div class="try">${ic("eye")}<span><b>${t("tryLabel")}</b> ${esc(L(v.tryit))}</span></div>
   <div class="guide-foot">
-   <div class="tourbar"><span class="count">Tour ${i+1} of ${VIEWS.length}</span>
-    <button class="btn btn-ghost" data-go="${prev?prev.id:""}" ${prev?"":"disabled"} aria-label="Previous view">${ic("back")}</button>
-    ${next?`<button class="btn btn-dark" data-go="${next.id}">Next: ${esc(next.nav)} ${ic("arrow")}</button>`:`<button class="btn btn-dark" data-go="home">Back to start ${ic("arrow")}</button>`}</div>
-   <button class="btn btn-line" id="fb-guide" style="align-self:flex-start">${ic("chat")} Comment on this view</button>
-   <span class="feedback-note" id="fb-note">Tell us what works and what is missing. Every comment helps shape the platform.</span>
+   <div class="tourbar"><span class="count">${t("tour")(i+1,VIEWS.length)}</span>
+    <button class="btn btn-ghost" data-go="${prev?prev.id:""}" ${prev?"":"disabled"} aria-label="${esc(t("prev"))}">${ic("back")}</button>
+    ${next?`<button class="btn btn-dark" data-go="${next.id}">${esc(t("next")(L(next.nav)))} ${ic("arrow")}</button>`:`<button class="btn btn-dark" data-go="home">${t("restart")} ${ic("arrow")}</button>`}</div>
+   <button class="btn btn-line" id="fb-guide" style="align-self:flex-start">${ic("chat")} ${t("comment")}</button>
+   <span class="feedback-note" id="fb-note">${t("fbNote")}</span>
   </div>`;
+}
+
+/* ---------- Static text, language switch, Ezencia links ---------- */
+function applyStatic(){
+ document.documentElement.lang=lang;
+ document.querySelectorAll("[data-t]").forEach(el=>{el.textContent="";el.insertAdjacentHTML("afterbegin",t(el.dataset.t));});
+ document.querySelectorAll("[data-t-html]").forEach(el=>{el.innerHTML=t(el.dataset.tHtml);});
+ document.querySelectorAll("[data-t-aria]").forEach(el=>el.setAttribute("aria-label",t(el.dataset.tAria)));
+ document.querySelectorAll("[data-lang]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.lang===lang)));
+ document.querySelectorAll(".ez-link").forEach(a=>a.href="https://felixrohde.com/?lang="+lang);
+ $("#nav").innerHTML=VIEWS.map(v=>`<button data-go="${v.id}">${esc(L(v.nav))}</button>`).join("");
+}
+function setLang(l){
+ if(!LANGS.includes(l)||l===lang)return;
+ const other=T[lang].defaultQuery;
+ lang=l;
+ if(S.query===other)S.query=t("defaultQuery");
+ try{localStorage.setItem("ase-lang",l);}catch(e){}
+ try{const u=new URL(location.href);u.searchParams.set("lang",l);history.replaceState(null,"",u.pathname+u.search+u.hash);}catch(e){}
+ applyStatic();
+ go(current,{keepScroll:true,noAnim:true});
 }
 
 /* ---------- Router ---------- */
@@ -731,14 +890,14 @@ function go(target,opts){
  if(sub){if(id==="opportunities")S.oppTab=sub;if(id==="matchmaking")S.filter=sub;}
  current=id;
  const v=byId[id];
- $("#nav").querySelectorAll("button").forEach(b=>b.setAttribute("aria-current",b.dataset.go===id?"page":"false"));
- const nav=$("#nav"),cur=nav.querySelector(`[data-go="${id}"]`);if(cur){nav.scrollTo({left:Math.max(0,cur.offsetLeft-nav.clientWidth/2+cur.offsetWidth/2),behavior:"smooth"});}
- $("#screen-title").textContent=v.win;
+ const nav=$("#nav");
+ nav.querySelectorAll("button").forEach(b=>b.setAttribute("aria-current",b.dataset.go===id?"page":"false"));
+ const cur=nav.querySelector(`[data-go="${id}"]`);if(cur){nav.scrollTo({left:Math.max(0,cur.offsetLeft-nav.clientWidth/2+cur.offsetWidth/2),behavior:"smooth"});}
+ $("#screen-title").textContent=L(v.win);
  renderGuide(v);
- render(true);
- try{history.replaceState(null,"","#"+id);}catch(e){}
+ render(!(opts&&opts.noAnim));
+ try{history.replaceState(null,"",location.pathname+location.search+"#"+id);}catch(e){}
  if(!opts||!opts.keepScroll){const top=document.querySelector(".shell").getBoundingClientRect().top+window.scrollY-90;if(window.scrollY>top)window.scrollTo({top:Math.max(0,top),behavior:"smooth"});}
- try{localStorage.setItem("ase-view",id);}catch(e){}
 }
 function render(animate){
  const el=$("#view");
@@ -746,62 +905,61 @@ function render(animate){
  if(animate){el.classList.remove("enter");void el.offsetWidth;el.classList.add("enter");}
  if(current==="space"){const c=$("#chat");if(c)c.scrollTop=c.scrollHeight;}
 }
-$("#nav").innerHTML=VIEWS.map(v=>`<button data-go="${v.id}">${esc(v.nav)}</button>`).join("");
 
 /* ---------- Events ---------- */
 document.addEventListener("click",e=>{
+ const lb=e.target.closest("[data-lang]");if(lb){setLang(lb.dataset.lang);return;}
  const g=e.target.closest("[data-go]");
  if(g){e.preventDefault();if(g.dataset.go)go(g.dataset.go);return;}
- const t=e.target;
- const f=t.closest("[data-filter]");if(f){S.filter=f.dataset.filter;render();return;}
- const rq=t.closest("[data-request]");if(rq){S.requested[rq.dataset.request]=true;render();toast("Conversation requested. In the live platform the other side gets a message.");return;}
- const pt=t.closest("[data-ptab]");if(pt){S.profTab=pt.dataset.ptab;render();return;}
- const br=t.closest("[data-bring]");if(br){const k=br.dataset.bring;S.bring[k]=!S.bring[k];render();return;}
- const et=t.closest("[data-etab]");if(et){S.evTab=et.dataset.etab;render();return;}
- const ot=t.closest("[data-otab]");if(ot){S.oppTab=ot.dataset.otab;render();return;}
- const mb=t.closest("[data-member]");if(mb){toast(`${mb.dataset.member} membership: prices and benefits are set in the founding workshop.`);return;}
- if(t.closest("#suggest")){S.suggested=["Coastal protection","Participatory design","Local materials"];render();return;}
- if(t.closest("#confirm-skills")){S.skills=S.skills.concat(S.suggested);S.suggested=[];S.progress=95;render();toast("Skills confirmed. Your profile now shows up for more matches.");return;}
- if(t.closest("#discard-skills")){S.suggested=[];render();return;}
- if(t.closest("#seat")){S.seat=!S.seat;render();if(S.seat)toast("Seat saved for “Water, data, sculpture”.");return;}
- if(t.closest("#adopt")){S.adopted=true;render();toast("Outcome added to your project space.");return;}
- if(t.closest("#interest")){S.interest=true;render();toast("Interest noted for the Platform Launch.");return;}
- if(t.closest("[data-share]")){go("outcomes");toast("Outcome shared. Others with a similar problem can now find it.");return;}
- if(t.closest("#fb-guide")||t.closest("#fb-ribbon")){openFeedback(t.closest("button"));return;}
+ const el=e.target;
+ const f=el.closest("[data-filter]");if(f){S.filter=f.dataset.filter;render();return;}
+ const rq=el.closest("[data-request]");if(rq){S.requested[rq.dataset.request]=true;render();toast(t("tRequested"));return;}
+ const pt=el.closest("[data-ptab]");if(pt){S.profTab=pt.dataset.ptab;render();return;}
+ const br=el.closest("[data-bring]");if(br){const k=br.dataset.bring;S.bring[k]=!S.bring[k];render();return;}
+ const et=el.closest("[data-etab]");if(et){S.evTab=et.dataset.etab;render();return;}
+ const ot=el.closest("[data-otab]");if(ot){S.oppTab=ot.dataset.otab;render();return;}
+ const mb=el.closest("[data-member]");if(mb){toast(t("tMember")(t("tiers")[+mb.dataset.member][1]));return;}
+ if(el.closest("#suggest")){S.suggesting=true;render();return;}
+ if(el.closest("#confirm-skills")){S.extraSkills=3;S.suggesting=false;S.progress=95;render();toast(t("tSkills"));return;}
+ if(el.closest("#discard-skills")){S.suggesting=false;render();return;}
+ if(el.closest("#seat")){S.seat=!S.seat;render();if(S.seat)toast(t("tSeat"));return;}
+ if(el.closest("#adopt")){S.adopted=true;render();toast(t("tAdopt"));return;}
+ if(el.closest("#interest")){S.interest=true;render();toast(t("tInterest"));return;}
+ if(el.closest("[data-share]")){go("outcomes");toast(t("tShared"));return;}
+ if(el.closest("#fb-guide")||el.closest("#fb-ribbon")){openFeedback();return;}
 });
 document.addEventListener("submit",e=>{
  e.preventDefault();
  const f=e.target;
  if(f.id==="home-search"){const v=$("#q-home").value.trim();if(v)S.query=v;S.filter="all";go("matchmaking");return;}
  if(f.id==="mm-search"){const v=$("#q-mm").value.trim();if(v)S.query=v;render();return;}
- if(f.id==="oc-search"){toast("Search across shared outcomes. In the prototype the results are fixed.");return;}
+ if(f.id==="oc-search"){toast(t("tOcSearch"));return;}
  if(f.id==="composer"){
   const v=$("#msg").value.trim();if(!v)return;
   S.msgs.push({mine:true,t:v});render();
-  const q=$("#quota"),m=$("#meter");
-  setTimeout(()=>{S.msgs.push({ai:true,t:"Found 3 relevant studies for your question. Summary is in the files, waiting for a team member to check it."});if(current==="space"){render();const q2=$("#quota"),m2=$("#meter");if(q2){q2.innerHTML="61&nbsp;%";m2.style.width="61%";}}},900);
-  return;
+  setTimeout(()=>{S.msgs.push({ai:true,reply:true});S.quota=61;if(current==="space")render();},900);
  }
 });
 
-/* ---------- Feedback via claude.ai comments ---------- */
+/* ---------- Feedback via claude.ai comments, Google Doc elsewhere ---------- */
 const FEEDBACK_DOC="https://docs.google.com/document/d/1jFCp0H6xiPv2NsNr3CpyDCC4AROZPMLV4O9V42jxRS8/edit";
-let commentsApi=null,commentsChecked=false;
-(async()=>{try{commentsApi=window.claude&&window.claude.use?await window.claude.use("comments"):null;}catch(e){commentsApi=null;}commentsChecked=true;})();
-async function openFeedback(btn){
+let commentsApi=null;
+(async()=>{try{commentsApi=window.claude&&window.claude.use?await window.claude.use("comments"):null;}catch(e){commentsApi=null;}})();
+async function openFeedback(){
  const note=$("#fb-note");
  if(!commentsApi){
   const w=window.open(FEEDBACK_DOC,"_blank","noopener");
-  if(!w&&note)note.innerHTML='Feedback document: <a href="'+FEEDBACK_DOC+'" target="_blank" rel="noopener">open it here</a>.';
+  if(!w&&note)note.innerHTML=t("fbOpen").replace("{u}",FEEDBACK_DOC);
   return;
  }
  try{
   const r=await commentsApi.openComposer({element:$("#view")});
-  if(!r||!r.opened){toast("Click into the page once, then try again.");}
- }catch(e){toast("Commenting is not available in this view.");}
+  if(!r||!r.opened)toast(t("toastFocus"));
+ }catch(e){toast(t("toastNoComments"));}
 }
 
 /* ---------- Boot ---------- */
+applyStatic();
 let start="home";
 const h=(location.hash||"").replace("#","");
 if(byId[h])start=h;
@@ -809,6 +967,7 @@ go(start,{keepScroll:true});
 window.addEventListener("hashchange",()=>{const k=(location.hash||"").replace("#","");if(byId[k]&&k!==current)go(k);});
 })();
 </script>
+
 
 </body>
 </html>
