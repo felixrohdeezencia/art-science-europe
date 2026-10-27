@@ -9,7 +9,7 @@
 <title>Art-Science Europe Prototype</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Geist:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&display=swap">
 <style>
 /* Layout: a "guide + screen" split taken from the pitch deck. Left, a quiet guide column explains the view; right, the platform itself, fully clickable. One light, green world (deliberately single-theme, per Anke). */
 :root{
@@ -302,35 +302,10 @@ footer.foot{border-top:1px solid var(--line);color:var(--muted);font-size:13px}
 footer.foot .inner{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-block:20px}
 
 
-/* Ezencia band: felixrohde.com CI (Oct 2026). Night sea fading into abyss, one quiet horizon, foam type in Geist. */
-.ez{--night:#0B1420;--abyss:#050A10;--foam:#FFFFFF;--foam-2:rgba(255,255,255,.86);--foam-3:rgba(255,255,255,.66);--hair:rgba(255,255,255,.22);--ink:#0E1A24;
-  position:relative;overflow:hidden;color:var(--foam-3);font-family:"Geist",system-ui,-apple-system,"Segoe UI",sans-serif;isolation:isolate;
-  background:linear-gradient(180deg,var(--night) 0%,#08111B 46%,var(--abyss) 100%)}
-.ez::before{content:"";position:absolute;right:-10%;top:-30%;width:70%;height:90%;z-index:-1;pointer-events:none;
-  background:radial-gradient(50% 50% at 50% 50%,rgba(191,224,242,.16),rgba(11,74,111,.16) 45%,transparent 72%)}
-.ez::after{content:"";position:absolute;left:0;right:0;top:0;height:1px;z-index:-1;background:linear-gradient(90deg,transparent,rgba(255,255,255,.14) 30%,rgba(255,255,255,.34) 72%,transparent)}
-.ez ::selection{background:#BFE0F2;color:var(--ink)}
-.ez .inner{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:40px 64px;align-items:end;padding-block:72px 32px}
-.ez-mark{display:inline-flex;align-items:center;gap:10px;color:var(--foam);text-decoration:none;font-weight:600;font-size:17px;letter-spacing:-.01em}
-.ez-mark img{width:28px;height:28px}
-.ez-claim{margin-top:28px;font-family:inherit;font-weight:640;font-size:clamp(40px,6vw,76px);line-height:.97;letter-spacing:-.042em;color:var(--foam);text-wrap:balance}
-.ez-side{display:flex;flex-direction:column;gap:16px;font-size:15px;line-height:1.55;max-width:40ch}
-.ez-side b{color:var(--foam);font-weight:500}
-.ez-pill{align-self:flex-start;display:inline-flex;align-items:center;gap:9px;min-height:46px;padding:0 22px;border-radius:999px;background:var(--foam);color:var(--ink);font-weight:600;font-size:15.5px;letter-spacing:-.005em;text-decoration:none;transition:transform .5s var(--ease),box-shadow .5s var(--ease)}
-.ez-pill svg{width:18px;height:18px}
-.ez-pill:hover{transform:translateY(-1px);box-shadow:0 14px 28px -16px rgba(5,10,16,.6)}
-.ez-pill:focus-visible{outline:2px solid var(--foam);outline-offset:3px;box-shadow:0 0 0 5px rgba(14,26,36,.55)}
-.ez-base{grid-column:1/-1;display:flex;justify-content:space-between;gap:12px 24px;flex-wrap:wrap;border-top:1px solid var(--hair);padding-top:18px;font-size:14px;line-height:1.6}
-.ez-base a{color:var(--foam-2);text-decoration:none}
-.ez-base a:hover{text-decoration:underline;text-underline-offset:3px}
-@media (max-width:720px){.ez .inner{grid-template-columns:1fr;padding-block:56px 28px}.ez::before{width:120%;right:-40%}}
-
 .lang{display:flex;gap:2px;flex:none;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--panel)}
 .lang button{min-width:36px;padding:5px 9px;border-radius:999px;font-size:12.5px;font-weight:600;letter-spacing:.04em;color:var(--muted);transition:background .2s,color .2s}
 .lang button:hover{color:var(--ink)}
 .lang button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
-.ez-claim-link{color:inherit;text-decoration:none}
-.ez-claim-link:hover{color:#DCEEF8}
 /* Hero kicker and statement (Anke, 27 Oct) */
 .hero .kicker{font-family:var(--text);font-size:12.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--green-deep)}
 /* Partner bar: real GERICS and Hereon marks */
@@ -462,20 +437,6 @@ footer.foot .inner{display:flex;justify-content:space-between;gap:16px;flex-wrap
   </div>
 </section>
 
-<section class="ez wrap" aria-label="Ezencia">
-  <div class="inner">
-    <div>
-      <a class="ez-mark ez-link" href="https://felixrohde.com/" target="_blank" rel="noopener"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAAGYktHRAD/AP8A/6C9p5MAAAAHdElNRQfqChcSCDV9vdz2AAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDI2LTEwLTIzVDE4OjA3OjMxKzAwOjAw69YGNAAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyNi0xMC0yM1QxODowNzoyNCswMDowMAQZkbEAAAAodEVYdGRhdGU6dGltZXN0YW1wADIwMjYtMTAtMjNUMTg6MDg6NTMrMDA6MDBtZdx0AAALf0lEQVR42u2de3BU1R3HP+fcDSEJJEASFJSQBuQhCMbO1CmCdEZRxzqt1IraDkUQW0dBqaJOi1QUtCPyUtAZH0WpdkSoYGttLWpHCtpOffAy8jC8kvEB7AY2EJKQ7Dn94+yGJSSbhGxyuXvPZyZ/5O7du797f9/z+537u+ecK0gi4WAZAoFGx2/OAQYCFwMjgaHAeUAukAV0BZxk2uEhFFADHANCwFfAdmAzsAUoBcKxnSUChSYnryBpBoj2HqDq0D7qhWy8uQdQDFwBXA4MBnoCaR11JVOMOqAC2AX8G3gf2AQcid8poBVZ+YXt+qF2CSAcLDt5IA1aMBAYH/0bgWnhlvZTBWwF1gJrFbpUxrmuPRHhjARQGSxHo+K/PgiYAtwEFLp9tVKcvcAqYDkmQgAagSQ7r1+bD9YmAWitqQyVx2/KByYDvwKK3L4yPmMP8BzwEnAotrGt0aDVAggf2g9CRL8khEZfDcwCRrt9JXyMBj4E5qFZh4j2vrUmJ79/qw7QKgGEQ2XEdey7A78GZmA6dhb3OQwsARYDRwEQkJPbcjRoUQDhYBlaNzT+fsB8YAIgW/qupVNRwOvAg0C5RiMQLaaEhAKI7+UDw4BngLFun6klIeuBu4ASFW24PRKIoNlWXBkqp77+ROzfYmAF1vleYCzGV8VSgNTRFN4MTUaAo6FyIlohzMfDowe8xO0zs7SJT4FJQAkapAPde50eCZqMAErrmPP7Y8K+db73+C7GdwUIUKrpnU4TQFzezwaewJRyLd5kLKbTng2n9emARgJoKPKYOuMM4Ea3z8DSbm4E7kFoAaaKG88pAlAqerOvGAfcg73VSwUkMAMtxgGNn9Se7ATGhYd8YA22wpdqbABuIFo2jtUHJMCRI/uNFIw4bsM6PxUZg3lgBwLCYZMKJICoF8b5gqGYBzuW1OQOYAgaqDOtvSHHO3UC4Fbs49xUphCYLGp1Q/IXlSFT68cM23oXK4BUZx8wDjPcDClPDue6Hut8P1CI8TVSOMiIKRH1wAzjsviD8UCO0pGGPkAxZsSuxR+MJFrejwngSuwATj+RhfE5ElMntvf9/mM0kC2BAZhRvRZ/MQgYIDH5INdtayydTi4wMiYAO2PHf6QRFcAQty2xuMYQCSRvpqHFaxRIzONfiz/Jl0A3t62wuEY3CaS7bYXFNdIldtiXn5HW+T7HCsDnWAH4HCsAn2MF4HOsAHyOFYDPsQLwOVYAPscKwOdYAfgcKwCfE3DbgDPFcRyEaPda10lBa00kEnHbjDPCkwKor6/nXx9sIBSqcF0EWmu6devGDy6/jMzMDLTW7T9oJ+I5AQghqKmpZdGSZ/n4k004jruvGlBKUfSd/hSPHE5WVgYe87/3BBBDa9P63G5xxga3r8aZYzuBPscKwOdYAfgcz/YBlIp0+K1XazuY+rTF17yDJwXgOA4jLhpGWloajkz+XYCQgurqGrZv30ntiRMJ91VKkZWZSVogzZOdQREOlnnObA3U1taiIioJ7z07FUc6HDx4iIVLnuWNtX+lvr75KBOJRBg2bChzHrqfy8eMcr0mcSZ4MgIIoGt6etIvuJSSki928Mi8J/lg/Ua01k3+Rmz7NVddwexZMxky+AJbCXSDZNUAhBBorXln3fvMfWwBO3Z+2WypWSlFRkZXJk28mRnT7yAvr5dnnQ8eF0AykFJSXV3NildWsmTpcwSDFc12/iKRCOee05uZ907jlpt+Qnp6FyIR1cZfPLvwtQAcx+HbAwdZsGgZr73+BrW1dThO03fGkYjiouEX8vDsBxg7ZhQQt7i2h/GtABzHYdvnX/DI3Pms3/ARAFI2n++vveZKZs+6j0EXDPR0yG+M7wQQy/f/+Od7zH1sATt3lTYb8pVSZGZkcOukn3HPtF+S26tnSjkffCaAWL5/+Y+vsWTpc4RChxPm+z7nnsP9903n5gnj6dIljYjydr5vCt8IwHEcvvn2AE8uXMbKVWs4cSJxvh85YjgPP3Q/Y0Z/H0iNfN8UvhCA40i2bithztz5bNj4HyBxvr/u2nE89NuZXDCwKOVCfmNSWgCxfP/2399l7uML+bJ0d8J8n5WZyZTJP2f6nbfTs2ePlHc+pLAApJQcP17N8hV/4ullz3P48JGE+b5v3z48OHM6N95wPWlpAVQK5vumSEkBOI7D1998y5MLl/L66jepq6tDNrMWhlKK4otHMGf2A1w26nsNI438QsoJwHEkm7d8ziPz5rPxw/8CNFvPl1Lyo+uuYdZv7mNAUaEvQn5jUkYAQgiUUrz19jrmPb6Q0t17Euf7rEymTp7ItLum0iMnx5fOhxQRgJSSquPHWf7Sqyx95gUOHwknzPfn9e3DAzPvZsJPf0wg4J983xSeF4DjOHz99Tc8seBpVv/5L9TV17cy3196VowqdhtPC0BKyabNW5kzdz4ffvQ/hLD5vq14UgBCmMrcW397h3m/X8TuPXubDflaa7K7d2fqlIlMu/M2evTIIRJRSZ9Q4lVBeVIAkYjixeWvsmDxMsLhyoTOTEsLcN0Pr+KyUZfyeckOk++TOZBIQ9euXblw6GC6dPHeqvueGxMohODosWNMuOU2Pv7kMwKBQIv7Z2ZkmHG7HXCmSisK+xew8tUX6HPuOSiP9Sk8GQHQxrGtGROoteZY1XE6xPuYVFRdU2M6kyffv+wZvCmANmJ00jEjdoXQiA46dmdgZwb5HCsAn+PZFKC1Qinl+mQMpRRKK6+l/gY8KQApBX379qGoqLBDpoa1BaUVBeefR8AJ2KlhnYXWmoqKw5yoq3O9+6WBgBOgV6+ezQ4xO5vxZAQQQpCXl8vZMhXPy2MIPCkA8P7SLGcL3otZlqRiBeBzrAB8jhWAz7EC8DlWAD7HCsDnWAH4HCsAn2MF4HMk4N9ZERYlgVq3rbC4Rq0EjrlthcU1jkrgkNtWWFwjKIEyt62wuEaZBHa4bYXFNbZLYAtQ57Yllk6nDtgmga1AyG1rLJ1OCNgigVJgl9vWWDqdXUCpBCqBjW5bY+l0NgKVsVLw+0CV2xZZOo0qjM8bngV8hukLWPzBVozPkUJIgCPAGretsnQaa4AjQkik1g3Pgt4E9rptmaXD2YvxNVorZE5eAQBCUAqscts6S4ezSghRCpCTV3ByPEB0ls0KYJ/bFlo6jH3Ay/HT2CRAQKvY8ibbgRfcttLSYTyPZgci6nOiAsjKLzTTXM1kyxexdYFUZCPwh9g6Rln5hUDckLCcvILYG3APAnOBCrcttiSNCuBRjG+J9fug0ZhAGQ0BCt4FFmOHi6UCClisEe8Bp02pP0UA2VFlSJMQngJWu229pd2sBp4S0W5+dm7BKR82ucRCONgwRqQ/8Aowxu2zsJwRG4CJwH44NfTHaHJYuBAituDhfuAuomVDi6f4DOO7/aARzcwAaHJrdm4/hITSr6oBtgFTgU/dPiNLq/kU47NtB8IHQEiy885vcseEq+yEg2Xxr1AfBjwDjHX77CwJWY9p+SUx3zUV+mMknBmUk1fQ8Oo1oAT4BfAa9u7gbERhfDMRKNG07Hxo5QK64VBZ/CLI3YG7gXuBXm6ftQUw9/mLgKeBowAIyMktaPGLrV5orTJYHisUmcW64Srgd8Aot8/e53wEPIrQ69DCOKiVzo/u2jbibhEBegNTgNuBIrevhM/Yg3lus5xohQ9oMeQ35oyWWqwMljVeG3cQMAm4GSuEjmYPsBLz5LZhMK/gZCGvLbRrrc34aKDRCMQAYHz0bySQ5fbVShGqMPM31kb/dsd/2NZWH0+7F1vVBw9SKWsab84BioErgdGYCJEHeO+lOu5QBwQxLXwj8B6wCQjH75StuiJ6927XDyV1td3KYDlSCCL6lLvE7sAA4BLgYmAw0A/Tf8gC0pNth4dQQA1mhnYIKAd2ApsxlbzdxHr1nHwjTXtafGP+D+TzoVNrBPpZAAAAAElFTkSuQmCC" width="28" height="28" alt="">Ezencia</a>
-      <p class="ez-claim"><a class="ez-link ez-claim-link" href="https://felixrohde.com/" target="_blank" rel="noopener" data-t-html="ezClaim"></a></p>
-    </div>
-    <div class="ez-side">
-      <p data-t-html="ezSide"></p>
-      <a class="ez-pill ez-link" href="https://felixrohde.com/" target="_blank" rel="noopener">felixrohde.com<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 12h15m-5.5-6 6 6-6 6"/></svg></a>
-    </div>
-    <div class="ez-base"><span><a class="ez-link" href="https://felixrohde.com/" target="_blank" rel="noopener">Felix Rohde</a> · Tabaiba, <span data-t="tenerife"></span> · <a href="mailto:felix@felixrohde.com">felix@felixrohde.com</a></span><span data-t="ezCore"></span></div>
-  </div>
-</section>
-
 <div class="toast" id="toast" role="status"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span></span></div>
 
 <script>
@@ -525,9 +486,6 @@ de:{
  dcaText:"<b>Konzept und erster Entwurf: Disruptive Consciousness.</b> Gemeinsam mit GERICS und der Art-Science-Community haben Siranus von Staden und Felix Rohde aus der Idee eine Plattform gemacht, durch die man sich klicken kann.",
  dcaCore:"Tiefe und Tempo.",
  kicker:"Kunst × Wissenschaft × Klimatransformation",
- ezClaim:"Weniger Schichten,<br>mehr Essenz.",
- ezSide:"<b>Prototyp entworfen und gebaut von Ezencia.</b> Felix Rohde hört zuerst zu, findet den Kern und verbindet alles, was daraus wächst: Marke, Plattform und KI, die Menschen Arbeit abnimmt.",
- tenerife:"Teneriffa", ezCore:"Erst die Essenz, dann alles andere.",
  tryLabel:"Ausprobieren:", tour:(i,n)=>`Tour ${i} von ${n}`, next:n=>`Weiter: ${n}`, restart:"Zurück zum Start", prev:"Vorherige Ansicht",
  fbNote:"Sagen Sie uns, was funktioniert und was fehlt. Jeder Kommentar hilft, die Plattform zu gestalten.",
  fbOpen:"Feedback-Dokument: <a href=\"{u}\" target=\"_blank\" rel=\"noopener\">hier öffnen</a>.",
@@ -593,9 +551,6 @@ en:{
  dcaText:"<b>Concept and first draft: Disruptive Consciousness.</b> Together with GERICS and the art-science community, Siranus von Staden and Felix Rohde turned the idea into a platform you can click through.",
  dcaCore:"Depth and pace.",
  kicker:"Art × Science × Climate Transformation",
- ezClaim:"Fewer layers,<br>more essence.",
- ezSide:"<b>Prototype designed and built by Ezencia.</b> Felix Rohde listens first, finds the core, and connects everything that grows from it: brand, platform, and AI that takes work off people’s plates.",
- tenerife:"Tenerife", ezCore:"Essence first, then everything else.",
  tryLabel:"Try it:", tour:(i,n)=>`Tour ${i} of ${n}`, next:n=>`Next: ${n}`, restart:"Back to start", prev:"Previous view",
  fbNote:"Tell us what works and what is missing. Every comment helps shape the platform.",
  fbOpen:"Feedback document: <a href=\"{u}\" target=\"_blank\" rel=\"noopener\">open it here</a>.",
@@ -912,14 +867,13 @@ function renderGuide(v){
   </div>`;
 }
 
-/* ---------- Static text, language switch, Ezencia links ---------- */
+/* ---------- Static text and language switch ---------- */
 function applyStatic(){
  document.documentElement.lang=lang;
  document.querySelectorAll("[data-t]").forEach(el=>{el.textContent="";el.insertAdjacentHTML("afterbegin",t(el.dataset.t));});
  document.querySelectorAll("[data-t-html]").forEach(el=>{el.innerHTML=t(el.dataset.tHtml);});
  document.querySelectorAll("[data-t-aria]").forEach(el=>el.setAttribute("aria-label",t(el.dataset.tAria)));
  document.querySelectorAll("[data-lang]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.lang===lang)));
- document.querySelectorAll(".ez-link").forEach(a=>a.href="https://felixrohde.com/?lang="+lang);
  document.querySelectorAll(".dca-link").forEach(a=>a.href=lang==="en"?"https://disruptive-consciousness.com/en/":"https://disruptive-consciousness.com/");
  $("#gerics-logo").src=LOGO_GERICS[lang];
  $("#gerics-link").href=lang==="en"?"https://www.gerics.de/index.php.en":"https://www.gerics.de/";

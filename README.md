@@ -2,7 +2,6 @@
 
 Concept prototype of the **European Art-Science-Tech Platform for Climate Transformation**.
 
-**Open it:** https://felixrohdeezencia.github.io/art-science-europe/
 
 Eight views with a guided tour, in German (default) and English (`?lang=en`). Each view explains itself on the left; the platform on the right is clickable.
 
